@@ -1,0 +1,56 @@
+/* Reset e estilos base */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+line-height: 1.6;
+color: #333;
+}
+
+.app {
+width: 100%;
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+}
+
+.container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 0 20px;
+width: 100%;
+}
+
+/* Header */
+.header {
+background: #8AE7FD;;
+width: 100%;
+}
+
+.header .container {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.logo img {
+height: 100px;
+display: block;
+}
+
+
+.nav {
+display: flex;
+gap: 40px;
+}
+
+.nav a {
+text-decoration: none;
+color: #596580;
+font-size: 16px;
+font-weight: 700;
+}
