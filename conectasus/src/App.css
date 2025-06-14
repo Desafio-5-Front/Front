@@ -311,3 +311,30 @@ body {
     background: #004d99;
     transform: translateY(-2px);
 }
+
+.footer {
+    background: #0066cc;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.footer-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 150px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.footer-logo {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+}
+
+.footer-contact {
+    color: white;
+    font-size: 16px;
+    margin-top: 20px;
+}
