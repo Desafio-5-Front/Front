@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/Desafio-5-Front/Front/static/css/main.44a32a2f.css",
+    "main.js": "/Desafio-5-Front/Front/static/js/main.6fcb4bfc.js",
+    "static/media/home.png": "/Desafio-5-Front/Front/static/media/home.b1269d674dc6f21130b3.png",
+    "static/media/icon.png": "/Desafio-5-Front/Front/static/media/icon.cb4daf1e3e0296172969.png",
+    "static/media/icon2.png": "/Desafio-5-Front/Front/static/media/icon2.7719de5eba638b4c12d0.png",
+    "static/media/inova.png": "/Desafio-5-Front/Front/static/media/inova.be651b76a69d32146a32.png",
+    "static/media/secti.png": "/Desafio-5-Front/Front/static/media/secti.030ee25fe41ffb042578.png",
+    "static/media/medic.png": "/Desafio-5-Front/Front/static/media/medic.24ca6b70a138ce55e76b.png",
+    "static/media/lupa.png": "/Desafio-5-Front/Front/static/media/lupa.d652e396e7ad3745f906.png",
+    "static/media/paper.png": "/Desafio-5-Front/Front/static/media/paper.4ae2516cac0afb42787b.png",
+    "index.html": "/Desafio-5-Front/Front/index.html",
+    "main.44a32a2f.css.map": "/Desafio-5-Front/Front/static/css/main.44a32a2f.css.map",
+    "main.6fcb4bfc.js.map": "/Desafio-5-Front/Front/static/js/main.6fcb4bfc.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.44a32a2f.css",
+    "static/js/main.6fcb4bfc.js"
+  ]
+}
