@@ -41,6 +41,24 @@ const App: React.FC = () => {
           </div>
         </div>
       </section>
+      <section className="about">
+        <div className="container">
+          <h2 className="about-title">Sobre o projeto</h2>
+          <p className="about-description">
+            O ConectaSUS é a sua porta de entrada para uma saúde pública mais acessível e transparente. Descubra nossos
+            serviços e experimente uma nova forma de gerenciar seu cuidado com agilidade e confiança.
+          </p>
+          <div className="about-box">
+
+            <p className="about-box-text">
+              No ConectaSUS, cada detalhe foi pensado para você. Aqui, a tecnologia anda de mãos dadas com o cuidado:
+              facilitamos o acesso à informação, aos serviços de saúde e ao seu histórico, porque acreditamos que estar
+              bem informado é o primeiro passo para ser bem cuidado.
+            </p>
+          </div>
+        </div>
+      </section>
+
     </div>
   )
 }
