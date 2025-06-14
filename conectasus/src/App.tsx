@@ -6,22 +6,21 @@ import iconImage from "./images/icon.png"
 const App: React.FC = () => {
     return (
         <div className="app">
-            {/* Header */}
             <header className="header">
                 <div className="container">
-                    {/* Logo modificada aqui */}
                     <div className="logo">
                         <img src={iconImage} alt="ConectaSUS Logo" />
                     </div>
                     <nav className="nav">
-                        <a href="#">Home</a>
-                        <a href="#">Sobre</a>
+                        <a href="#home">Home</a>
+                        <a href="#about">Sobre</a>
+                        <a href="#features">Funções</a>
                         <a href="#">Login</a>
-                        <a href="#">Contato</a>
+                        <a href="#footer">Contato</a>
                     </nav>
                 </div>
             </header>
-            <section className="hero" style={{ height: '700px' }}>
+            <section id='home' className="hero" style={{ height: '700px' }}>
                 <div className="hero-background" style={{ backgroundImage: `url(${homeImage})` }}></div>
                 <div className="container">
                     <div className="hero-content">
@@ -41,7 +40,7 @@ const App: React.FC = () => {
                     </div>
                 </div>
             </section>
-            <section className="about">
+            <section id='about' className="about">
                 <div className="container">
                     <h2 className="about-title">Sobre o projeto</h2>
                     <p className="about-description">
@@ -49,7 +48,6 @@ const App: React.FC = () => {
                         serviços e experimente uma nova forma de gerenciar seu cuidado com agilidade e confiança.
                     </p>
                     <div className="about-box">
-
                         <p className="about-box-text">
                             No ConectaSUS, cada detalhe foi pensado para você. Aqui, a tecnologia anda de mãos dadas com o cuidado:
                             facilitamos o acesso à informação, aos serviços de saúde e ao seu histórico, porque acreditamos que estar
@@ -58,73 +56,48 @@ const App: React.FC = () => {
                     </div>
                 </div>
             </section>
-            <section className="features">
+            <section id='features'className="features">
                 <div className="container">
                     <h1 className="features-main-title">Conheças as funcionalidades</h1>
-
                     <div className="features-grid">
                         <div className="feature-card">
                             <div className="feature-image-container">
-                                <img
-                                    src={require("./images/lupa.png")}
-                                    alt="Ícone de lupa - Dados de saúde"
-                                    className="feature-image"
-                                />
+                                <img src={require("./images/lupa.png")}alt="Ícone de lupa - Dados de saúde" className="feature-image"/>
                             </div>
                             <div className="feature-content">
                                 <h2 className="feature-title">Conheça dados importantes de saúde</h2>
-                                <p className="feature-description">
-                                    Acesse seu prontuário, resultados de exames e vacinas registradas em um só lugar.
-                                </p>
-                                <button className="feature-button">
-                                    Clique aqui <span className="arrow">→</span>
-                                </button>
+                                <p className="feature-description"> Acesse seu prontuário, resultados de exames e vacinas registradas em um só lugar.</p>
+                                <button className="feature-button">Clique aqui <span className="arrow">→</span></button>
                             </div>
                         </div>
-
-                        {/* Card 2 */}
                         <div className="feature-card">
                             <div className="feature-image-container">
-                                <img
-                                    src={require("./images/medic.png")}
-                                    alt="Ícone de localização"
-                                    className="feature-image"
-                                />
+                                <img src={require("./images/medic.png")} alt="Ícone de localização" className="feature-image"/>
                             </div>
                             <div className="feature-content">
                                 <h2 className="feature-title">Veja a unidade mais próxima</h2>
                                 <p className="feature-description">
                                     Encontre facilmente postos, clínicas e hospitais do SUS pelo mapa interativo.
                                 </p>
-                                <button className="feature-button">
-                                    Clique aqui <span className="arrow">→</span>
-                                </button>
+                                <button className="feature-button">Clique aqui <span className="arrow">→</span></button>
                             </div>
                         </div>
-
-                        {/* Card 3 */}
                         <div className="feature-card">
                             <div className="feature-image-container">
-                                <img
-                                    src={require("./images/paper.png")}
-                                    alt="Ícone de jogo"
-                                    className="feature-image"
-                                />
+                                <img src={require("./images/paper.png")} alt="Ícone de jogo" className="feature-image"/>
                             </div>
                             <div className="feature-content">
                                 <h2 className="feature-title">Aprenda enquanto joga</h2>
                                 <p className="feature-description">
                                     Conheça nosso jogo sobre saúde e transforme conhecimento em prática de forma divertida.
                                 </p>
-                                <button className="feature-button">
-                                    Clique aqui <span className="arrow">→</span>
-                                </button>
+                                <button className="feature-button"> Clique aqui <span className="arrow">→</span> </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            <footer className="footer">
+            <footer id='footer' className="footer">
                 <div className="footer-logos">
                     <img src={require("./images/inova.png")} alt="Logo INOVA" className="footer-logo" />
                     <img src={require("./images/icon2.png")} alt="Logo Governo" className="footer-logo" />
@@ -133,7 +106,7 @@ const App: React.FC = () => {
                 <div className="footer-contact">
                     Contato: conectasusgp2@gmail.com
                 </div>
-            </footer>
+            </footer>       
         </div>
     )
 }

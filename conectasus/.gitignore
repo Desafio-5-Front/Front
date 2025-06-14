@@ -27,3 +27,4 @@ tsconfig.json
 react-app-env.d.ts
 reportWebVitals.ts
 setupTests.ts
+.vercel
