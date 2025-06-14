@@ -54,3 +54,115 @@ color: #596580;
 font-size: 16px;
 font-weight: 700;
 }
+.hero {
+    padding: 80px 0;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 50%, #90caf9 100%);
+  }
+  
+  .hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+  }
+  
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 102, 204, 0.4) 0%,
+      rgba(40, 167, 69, 0.3) 50%,
+      rgba(253, 126, 20, 0.2) 100%
+    );
+    z-index: 2;
+  }
+  
+  .hero .container {
+    position: relative;
+    z-index: 3;
+  }
+  
+  .hero-content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+  }
+  
+  .hero-title {
+    font-size: 80px;
+    font-weight: bold;
+    color: #002C69;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .hero-subtitle {
+    font-size: 35px;
+    font-weight: 390;
+    color: #002C69;
+    margin-bottom: 24px;
+  }
+  
+  .hero-description {
+    font-size: 28px;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 40px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .hero-buttons-container {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+  
+  /* Mantenha esta parte para o alinhamento */
+  .hero-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .btn {
+    display: block; /* Faz cada botão ocupar sua  linha */
+    background: #A9F2FF;
+    color: #002C69;
+    border: 2px solid black;
+    padding: 14px 28px;
+    border-radius: 40px;
+    font-size: 16px;
+    font-weight: 600;
+    width: 250px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .btn:hover {
+    background: #e0e0e0;
+    transform: translateY(-2px);
+  }
+  
