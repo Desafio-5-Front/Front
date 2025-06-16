@@ -28,3 +28,6 @@ react-app-env.d.ts
 reportWebVitals.ts
 setupTests.ts
 .vercel
+readme.txt
+project.json
+vercel

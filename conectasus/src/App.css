@@ -24,8 +24,7 @@ body {
     background: #8AE7FD;
     width: 100%;
     position: fixed;
-    z-index: 3;
-    padding-top: -100px;
+    z-index: 10;
 }
 .header .container {
     display: flex;
@@ -47,7 +46,7 @@ body {
     font-weight: 700;
 }
 .hero {
-    padding: 80px 0;
+    padding: 150px 0;
     width: 100%;
     position: relative;
     overflow: hidden;
