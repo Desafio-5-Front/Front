@@ -1,9 +1,15 @@
-import type React from "react"
+import React, { useState } from "react"
 import "./App.css"
 import homeImage from "./images/home.png"
 import iconImage from "./images/icon.png"
 
-const App: React.FC = () => {
+const Header: React.FC = () => {
+    const [isOpen, setIsOpen] = useState(false)
+
+    const toggleMenu = () => {
+        setIsOpen(!isOpen)
+    }
+
     return (
         <div className="app">
             <header className="header">
@@ -11,16 +17,19 @@ const App: React.FC = () => {
                     <div className="logo">
                         <img src={iconImage} alt="ConectaSUS Logo" />
                     </div>
-                    <nav className="nav">
-                        <a href="#home">Home</a>
-                        <a href="#about">Sobre</a>
-                        <a href="#features">Funções</a>
-                        <a href="#">Login</a>
-                        <a href="#footer">Contato</a>
+                    <button className="menu-toggle" onClick={toggleMenu}>
+                        ☰
+                    </button>
+                    <nav className={`nav ${isOpen ? "open" : ""}`}>
+                    <a href="#home" onClick={() => setIsOpen(false)}>Home</a>
+                    <a href="#about" onClick={() => setIsOpen(false)}>Sobre</a>
+                    <a href="#features" onClick={() => setIsOpen(false)}>Funções</a>
+                    <a href="#" onClick={() => setIsOpen(false)}>Login</a>
+                    <a href="#footer" onClick={() => setIsOpen(false)}>Contato</a>
                     </nav>
                 </div>
             </header>
-            <section id='home' className="hero" style={{ height: '700px' }}>
+            <section id='home' className="hero">
                 <div className="hero-background" style={{ backgroundImage: `url(${homeImage})` }}></div>
                 <div className="container">
                     <div className="hero-content">
@@ -31,7 +40,7 @@ const App: React.FC = () => {
                                 O ConectaSUS é um portal digital que facilita o acesso aos serviços do SUS. Consulte vacinação, exames,
                                 atendimentos e encontre unidades de saúde de forma simples, rápida e integrada.
                             </p>
-                            <div className="hero-buttons" style={{ marginLeft: "800px" }}>
+                             <div className="hero-buttons">
                                 <button className="btn" style={{ marginTop: "-300px" }}>Consultar unidades →</button>
                                 <button className="btn" style={{ marginTop: "20px" }}>Dashboard →</button>
                                 <button className="btn" style={{ marginTop: "20px" }}>Jogar agora →</button>
@@ -58,7 +67,7 @@ const App: React.FC = () => {
             </section>
             <section id='features'className="features">
                 <div className="container">
-                    <h1 className="features-main-title">Conheças as funcionalidades</h1>
+                    <h1 className="features-main-title">Conheça as funcionalidades</h1>
                     <div className="features-grid">
                         <div className="feature-card">
                             <div className="feature-image-container">
@@ -111,4 +120,4 @@ const App: React.FC = () => {
     )
 }
 
-export default App
+export default Header

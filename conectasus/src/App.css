@@ -37,12 +37,20 @@ body {
 }
 .nav {
     display: flex;
-    gap: 40px;
+    gap: 2.5rem;
+}
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #333;
+  cursor: pointer;
 }
 .nav a {
     text-decoration: none;
     color: #596580;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 700;
 }
 .hero {
@@ -89,20 +97,20 @@ body {
     max-width: 600px;
 }
 .hero-title {
-    font-size: 80px;
+    font-size: 5rem;
     font-weight: bold;
     color: #002C69;
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 .hero-subtitle {
-    font-size: 35px;
+    font-size: 2rem;
     font-weight: 390;
     color: #002C69;
     margin-bottom: 24px;
 }
 .hero-description {
-    font-size: 28px;
+    font-size: 1.75rem;
     color: #fff;
     line-height: 1.2;
     margin-bottom: 40px;
@@ -119,7 +127,7 @@ body {
 .hero-buttons {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 1rem;
 }
 .btn {
     display: block;
@@ -128,12 +136,13 @@ body {
     border: 2px solid black;
     padding: 14px 28px;
     border-radius: 40px;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 600;
     width: 250px;
     text-align: left;
     cursor: pointer;
     transition: all 0.3s ease;
+    margin-top: 1rem;
 }
 .btn:hover {
     background: #e0e0e0;
@@ -145,14 +154,14 @@ body {
     width: 100%;
 }
 .about-title {
-    font-size: 36px;
+    font-size: 2.25rem;
     font-weight: bold;
     color: #0066cc;
     text-align: center;
     margin-bottom: 32px;
 }
 .about-description {
-    font-size: 20px;
+    font-size: 1.25rem;
     color: #666;
     text-align: center;
     max-width: 800px;
@@ -173,13 +182,13 @@ body {
     right: 30px;
 }
 .plus {
-    font-size: 32px;
+    font-size: 2rem;
     color: #0066cc;
     font-weight: bold;
     margin-left: 8px;
 }
 .about-box-text {
-    font-size: 18px;
+    font-size: 1.125rem;
     color: #555;
     line-height: 1.7;
     padding-right: 80px;
@@ -189,7 +198,7 @@ body {
     background: #B0F4FF;
 }
 .features-main-title {
-    font-size: 36px;
+    font-size: 2.25rem;
     text-align: center;
     margin-bottom: 60px;
     color: #0066cc;
@@ -225,7 +234,7 @@ body {
     flex-grow: 1;
 }
 .feature-title {
-    font-size: 20px;
+    font-size: 1.25rem;
     color: #333;
     margin-bottom: 15px;
 }
@@ -241,7 +250,7 @@ body {
     border: none;
     padding: 12px 10px;
     border-radius: 30px;
-    font-size: 19px;
+    font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
     display: inline-block;
@@ -278,6 +287,118 @@ body {
 }
 .footer-contact {
     color: white;
-    font-size: 16px;
+    font-size: 1rem;
     margin-top: 20px;
+}
+
+@media only screen and (max-width: 480px) {
+.hero-content {
+    text-align: center;
+    align-items: center;
+  }
+
+.hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+.nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+.nav a {
+    padding: 10px;
+    display: block;
+  }
+
+.features-grid {
+    grid-template-columns: 1fr;
+  }
+
+.feature-card {
+    margin-bottom: 2rem;
+  }
+
+.footer-logos {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+
+.header {
+    background: #8AE7FD;
+    width: 100%;
+    height: min-content;
+    position: fixed;
+    z-index: 10;
+}
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    top: -10px;
+}
+.about-title {
+    padding-top: 10px;
+}
+.features-main-title {
+    padding-top: 10px;
+}
+.menu-toggle {
+    display: block;
+    position: absolute;
+    right: 1rem;
+    top: 1.5rem;
+    z-index: 1001;
+}
+  .nav {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: #8AE7FD;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    display: none;
+    z-index: 1000;
+}
+.nav.open {
+    display: flex;
+}
+.nav a {
+    padding: 10px;
+    display: block;
+}  
+.hero-buttons {
+    flex-direction: column;
+}
+.features-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centraliza os itens horizontalmente */
+    gap: 2rem;
+  }
+
+.feature-card {
+    margin-bottom: 2rem;
+    align-items: center;
+  }
+
+.feature-image {
+    margin: 20px auto;
+    align-items: center;
+}
+
+.footer-logos {
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
