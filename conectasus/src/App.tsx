@@ -17,9 +17,7 @@ const Header: React.FC = () => {
                     <div className="logo">
                         <img src={iconImage} alt="ConectaSUS Logo" />
                     </div>
-                    <button className="menu-toggle" onClick={toggleMenu}>
-                        ☰
-                    </button>
+                    <button className="menu-toggle" onClick={() => setIsOpen(!isOpen)}>☰</button>
                     <nav className={`nav ${isOpen ? "open" : ""}`}>
                     <a href="#home" onClick={() => setIsOpen(false)}>Home</a>
                     <a href="#about" onClick={() => setIsOpen(false)}>Sobre</a>
