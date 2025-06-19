@@ -55,8 +55,8 @@ const Header: React.FC = () => {
                         serviços e experimente uma nova forma de gerenciar seu cuidado com agilidade e confiança.
                     </p>
                     <div className="about-box">
-                        <p className="about-box-text">
-                            No ConectaSUS, cada detalhe foi pensado para você. Aqui, a tecnologia anda de mãos dadas com o cuidado:
+                        <p className="about-description">
+                            Cada detalhe foi pensado para você. Aqui, a tecnologia anda de mãos dadas com o cuidado:
                             facilitamos o acesso à informação, aos serviços de saúde e ao seu histórico, porque acreditamos que estar
                             bem informado é o primeiro passo para ser bem cuidado.
                         </p>
