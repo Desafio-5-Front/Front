@@ -55,6 +55,14 @@ body {
     font-size: 16px;
     font-weight: 700;
 }
+.nav-link{
+    text-decoration: none;
+    color: #596580;
+    font-size: 16px;
+    font-weight: 700;
+    background-color: #8AE7FD;
+    border: none;
+}
 
 .hero {
     padding: 80px 0;
@@ -337,4 +345,50 @@ body {
     color: white;
     font-size: 16px;
     margin-top: 20px;
+}
+
+/* Estiliza o wrapper do modal para criar o efeito de desfoque e posicionamento */
+.modal-wrapper {
+  /*position: fixed;  Fixa o modal na tela */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(230, 240, 250, 0.5); /* Fundo semi-transparente */
+  backdrop-filter: blur(5px); /* Efeito de desfoque no fundo */
+  display: flex; /* Usa flexbox para centralizar o conteúdo */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Garante que o modal fique acima do conteúdo principal */
+}
+
+/* Garante que o conteúdo do modal (Login/Cadastro) fique acima do fundo desfocado */
+.modal-wrapper > * {
+  z-index: 1001;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.login-container {
+  display: none; /* Será controlado pelo estado */
+}
+
+.modal-overlay .login-container {
+  display: block;
+}
+
+.modal-wrapper {
+  position: relative;
+  z-index: 1; /* Garante que o conteúdo principal fique abaixo do modal */
 }
