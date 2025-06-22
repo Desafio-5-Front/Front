@@ -1,3 +1,4 @@
+
 import React from "react"; // Importa o tipo React para tipagem
 import "./App.css"; // Importa o arquivo CSS global
 import homeImage from "./images/home.png"; // Importa a imagem de fundo
