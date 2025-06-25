@@ -7,7 +7,6 @@ import logoImage from "../../images/icon.png"
 interface CadastroState {
     email: string;
     nome: string;
-    cpf: string;
     senha: string;
     confirmSenha: string;
     error: string;
@@ -34,7 +33,6 @@ const Cadastro: React.FC<CadastroProps> = ({onClose, onLoginClick}) => {
     const [stateCadastro, setStateCadastro] = useState <CadastroState> ({
        email: state?.email || "",
         nome: "",
-        cpf: "",
         senha: "",
         confirmSenha: "",
         error: "",
@@ -45,17 +43,10 @@ const Cadastro: React.FC<CadastroProps> = ({onClose, onLoginClick}) => {
     //Função para o envio do formulário de Cadastro
     const handleSubmit = () => {
         const existingEmail = localStorage.getItem ("userEmail");
-        const existingCpf = localStorage.getItem ("userCpf");
         
         //Valida se todos os campos estão preenchidos
-        if (!stateCadastro.email || !stateCadastro.nome || !stateCadastro.cpf || !stateCadastro.senha|| !stateCadastro.confirmSenha ) {
+        if (!stateCadastro.email || !stateCadastro.nome || !stateCadastro.senha|| !stateCadastro.confirmSenha ) {
             setStateCadastro ((prev) => ({...prev, error: "Todos os campos são obrigatórios"}));
-            return;
-        }
-
-        //Valida o formato do CPF (11 dígitos)
-        if (!/^\d{11}$/.test(stateCadastro.cpf)) {
-            setStateCadastro ((prev) => ({...prev, error: "CPF deve ter 11 dígitos numéricos"}));
             return;
         }
 
@@ -65,15 +56,14 @@ const Cadastro: React.FC<CadastroProps> = ({onClose, onLoginClick}) => {
             return;
         }
 
-        //Verifica duplicidade do email ou CPF
-        if (existingEmail === stateCadastro.email || existingCpf === stateCadastro.cpf) {
-            setStateCadastro ((prev) => ({...prev, error: "Email ou CPF já cadastrado"}));
+        //Verifica duplicidade do email
+        if (existingEmail === stateCadastro.email) {
+            setStateCadastro ((prev) => ({...prev, error: "Email já cadastrado"}));
             return
         }
 
         //Salva os dados no localStorage e configura o login
         localStorage.setItem ("userNome", stateCadastro.nome);
-        localStorage.setItem ("userCpf", stateCadastro.cpf);
         localStorage.setItem ("userEmail", stateCadastro.email);
         localStorage.setItem ("userSenha", stateCadastro.senha);
         localStorage.setItem ("isLoggedIn", "true");
@@ -97,13 +87,6 @@ const Cadastro: React.FC<CadastroProps> = ({onClose, onLoginClick}) => {
             placeholder="Nome"
             className="cadastro-input"
           />
-            <input
-              type="text"
-              value={stateCadastro.cpf}
-              onChange={(e) => setStateCadastro((prev) => ({ ...prev, cpf: e.target.value }))}
-              placeholder="CPF"
-              className="cadastro-input"
-            />
           <input
             type="email"
             value={stateCadastro.email}

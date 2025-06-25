@@ -12,7 +12,7 @@ body {
 
 .app {
     width: 100%;
-    min-height: 100vh;
+    min-height: 20vh;
     display: flex;
     flex-direction: column;
 }
@@ -62,7 +62,8 @@ body {
     font-size: 1rem;
     font-weight: 700;
 }
-.nav-link{
+
+.nav-link {
     text-decoration: none;
     color: #596580;
     font-size: 16px;
@@ -318,8 +319,9 @@ body {
 }
 
 .footer {
+    height: 250px;
     background: #0066cc;
-    padding: 40px 20px;
+    padding: 50px 20px;
     text-align: center;
 }
 
@@ -328,12 +330,12 @@ body {
     justify-content: center;
     align-items: center;
     gap: 150px;
-    margin-bottom: 30px;
+    margin-bottom: 1px;
     flex-wrap: wrap;
 }
 
 .footer-logo {
-    height: 60px;
+    height: 50px;
     width: auto;
     object-fit: contain;
 }
@@ -341,54 +343,100 @@ body {
 .footer-contact {
     color: white;
     font-size: 1rem;
-    margin-top: 20px;
+    margin-top: 50px;
 }
 
 
 /* Estiliza o wrapper do modal para criar o efeito de desfoque e posicionamento */
 .modal-wrapper {
-  /*position: fixed;  Fixa o modal na tela */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(230, 240, 250, 0.5); /* Fundo semi-transparente */
-  backdrop-filter: blur(5px); /* Efeito de desfoque no fundo */
-  display: flex; /* Usa flexbox para centralizar o conteúdo */
-  justify-content: center;
-  align-items: center;
-  z-index: 1000; /* Garante que o modal fique acima do conteúdo principal */
+    /*position: fixed;  Fixa o modal na tela */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(230, 240, 250, 0.5);
+    /* Fundo semi-transparente */
+    backdrop-filter: blur(5px);
+    /* Efeito de desfoque no fundo */
+    display: flex;
+    /* Usa flexbox para centralizar o conteúdo */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    /* Garante que o modal fique acima do conteúdo principal */
 }
 
 /* Garante que o conteúdo do modal (Login/Cadastro) fique acima do fundo desfocado */
-.modal-wrapper > * {
-  z-index: 1001;
+.modal-wrapper>* {
+    z-index: 1001;
 }
 
 .modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }
 
 .login-container {
-  display: none; /* Será controlado pelo estado */
+    display: none;
+    /* Será controlado pelo estado */
 }
 
 .modal-overlay .login-container {
-  display: block;
+    display: block;
 }
 
 .modal-wrapper {
-  position: relative;
-  z-index: 1; /* Garante que o conteúdo principal fique abaixo do modal */
+    position: relative;
+    z-index: 1;
+    /* Garante que o conteúdo principal fique abaixo do modal */
+}
+
+.modal-content {
+    background-color: white;
+    border-radius: 8px;
+    width: 100%;
+    height: 100%;
+    max-width: 2000vh;
+    max-height: 5000vh;
+    overflow-y: hidden;
+    overflow-y: hidden;
+
+}
+
+/* Add hover effect for options */
+
+.option {
+
+    flex: 1;
+
+    background-color: #333;
+
+    color: white;
+
+    padding: 10px;
+
+    border-radius: 4px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+}
+
+
+
+.option:hover {
+
+    background-color: #555;
+
 }
 
 @media (max-width: 768px) {
@@ -531,6 +579,7 @@ body {
         gap: 1rem;
     }
 }
+
 @media only screen and (max-width: 480px) {
     .hero-content {
         text-align: center;

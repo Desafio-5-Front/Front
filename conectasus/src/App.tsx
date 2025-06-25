@@ -1,101 +1,47 @@
-
-import React from "react"; // Importa o tipo React para tipagem
-import "./App.css"; // Importa o arquivo CSS global
-import homeImage from "./images/home.png"; // Importa a imagem de fundo
-import iconImage from "./images/icon.png"; // Importa o ícone do logo
-import { Route, Routes, Navigate, Link, useNavigate, useLocation } from "react-router-dom"; // Importa apenas o necessário
-import Login from "./components/login/Login"; // Importa Login
-import Cadastro from "./components/cadastro/Cadastro"; // Importa Cadastro
+import React from "react";
+import { useEffect } from "react"
+import "./App.css";
+import homeImage from "./images/home.png";
+import iconImage from "./images/icon.png";
+import { Route, Routes, Navigate, Link, useNavigate, useLocation } from "react-router-dom";
+import Login from "./components/login/Login";
+import Cadastro from "./components/cadastro/Cadastro";
 import EsqueciSenha from "./components/login/EsqueciSenha";
 import RedefinirSenha from "./components/login/RedefinirSenha";
 import Jogar from "./jogar/Jogar"
-
-// Interface para props de componentes genéricos
-interface BaseProps {
-  children?: React.ReactNode;
-}
-
-// Componente ProtectedRoute (usado em rotas)
-const ProtectedRoute: React.FC<BaseProps> = ({ children }) => {
-  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-  console.log("ProtectedRoute - isLoggedIn:", isLoggedIn); // Depuração
-  return isLoggedIn ? <>{children}</> : <Navigate to="/login" replace />;
-};
-
-// Componentes Placeholder
-const Home: React.FC = () => <></>;
-const Sobre: React.FC = () => <h1>Sobre</h1>;
-const Contato: React.FC = () => <h1>Contato</h1>;
-//const Jogar: React.FC = () => <></>;
-
+interface BaseProps {children?: React.ReactNode;}
+const ProtectedRoute: React.FC<BaseProps> = ({ children }) => {const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";console.log("ProtectedRoute - isLoggedIn:", isLoggedIn);return isLoggedIn ? <>{children}</> : <Navigate to="/login" replace />;};
 const App: React.FC = () => {
+  const router = useNavigate();
   const navigate = useNavigate();
   const location = useLocation();
+  const [showConsulta, setShowConsulta] = React.useState(false);
+  const [showMap, setShowMap] = React.useState(false);
+  const [openDropdown, setOpenDropdown] = React.useState<number | null>(null);
   const [showLogin, setShowLogin] = React.useState(false);
   const [showCadastro, setShowCadastro] = React.useState(false);
   const [showEsqueciSenha, setShowEsqueciSenha] = React.useState(false);
   const [showRedefinirSenha, setShowRedefinirSenha] = React.useState(false);
-
-  const handleLoginClick = () => {
-    setShowLogin(true);
-
-  };
-
-  const handleJogarClick = () => {
-    // Se o usuário não estiver logado, abra o modal de login
-    if (localStorage.getItem("isLoggedIn") !== "true") {
-      setShowLogin(true);
-    } else {
-      // Se já estiver logado, navegue diretamente para /jogar
-      navigate("/jogar");
-    }
-  };
-
-  const handleCadastroClick = () => {
-    setShowLogin(false);
-    setShowCadastro(true);
-  }
-
-  const handleEsqueciSenhaClick = () => { // [Mudança] Nova função
-    setShowLogin(false); // Fecha o modal de login
-    setShowEsqueciSenha(true); // Abre o modal de "Esqueceu a senha"
-  };
-
-  const handleRedefinirSenhaClick = () => { // [Mudança] Nova função
-    setShowEsqueciSenha(false); // Fecha o modal de "Esqueceu a senha"
-    setShowRedefinirSenha(true); // Abre o modal de "Redefinir Senha"
-  };
-
-  const handleGoToLogin = () => {
-    setShowCadastro(false); // Fecha o modal de cadastro
-    setShowEsqueciSenha(false);
-    setShowRedefinirSenha(false);
-    setShowLogin(true);    // Abre o modal de login
-  };
-
-  // **NOVA FUNÇÃO AQUI:** Centraliza a lógica de sucesso de login
-  const handleLoginSuccess = () => {
-    setShowLogin(false); // Fecha o modal de login
-    navigate("/jogar", { replace: true }); // Redireciona para a página "Jogar"
-  };
-
-  // Verifica se a rota atual é a homepage
+  useEffect(() => {if (showConsulta) {const scrollY = window.scrollY;document.body.style.position = 'fixed';document.body.style.top = `-${scrollY}px`;document.body.style.width = '100%';return () => {const scrollY = document.body.style.top;document.body.style.position = '';document.body.style.top = '';window.scrollTo(0, parseInt(scrollY || '0') * -1);};}}, [showConsulta]);
+  useEffect(() => {console.log("Rota atual:", location.pathname)}, [location])
+  const handleLoginClick = () => {setShowLogin(true);};
+  const handleJogarClick = () => {if (localStorage.getItem("isLoggedIn") !== "true") {setShowLogin(true);} else {navigate("/jogar");}};
+  const handleCadastroClick = () => {setShowLogin(false);setShowCadastro(true);}
+  const handleEsqueciSenhaClick = () => {setShowLogin(false);setShowEsqueciSenha(true);};
+  const handleRedefinirSenhaClick = () => {setShowEsqueciSenha(false);setShowRedefinirSenha(true);};
+  const handleGoToLogin = () => {setShowCadastro(false);setShowEsqueciSenha(false);setShowRedefinirSenha(false);setShowLogin(true);};
+  const handleLoginSuccess = () => {setShowLogin(false); navigate("/jogar", { replace: true });};
   const isHomePage = location.pathname === "/";
-  // Verifica se a rota atual é a página de jogo
-  const isJogarPage = location.pathname === "/jogar";
-
   return (
-    <div className="app">
+    <div className="app" style={{ zIndex: 1000 }}>
       <header className="header">
         <div className="container">
           <div className="logo">
             <img src={iconImage} alt="ConectaSUS Logo" />
           </div>
           <nav className="nav">
-            <Link to="/">Home</Link>
-            <Link to="/sobre">Sobre</Link>
-            <button className="nav-link" onClick={handleLoginClick}>Login</button> {/* Substitui Link por botão */}
-            <Link to="/contato">Contato</Link>
+            <a href="#"></a>
+            <button className="nav-link" onClick={handleLoginClick}>Login</button>
           </nav>
         </div>
       </header>
@@ -113,12 +59,10 @@ const App: React.FC = () => {
                     atendimentos e encontre unidades de saúde de forma simples, rápida e integrada.
                   </p>
                   <div className="hero-buttons" style={{ marginLeft: "800px" }}>
-                    <button className="btn" style={{ marginTop: "-300px" }}>
-                      <Link to="/unidades">Consultar unidades →</Link>
+                    <button className="btn" style={{ marginTop: "-300px" }} onClick={() => setShowConsulta(true)}>
+                      Consultar unidades →
                     </button>
-                    <button className="btn" style={{ marginTop: "20px" }}>
-                      <Link to="/dashboard">Dashboard →</Link>
-                    </button>
+
                     <button className="btn" style={{ marginTop: "20px" }} onClick={handleJogarClick}>
                       Jogar agora
                     </button>
@@ -149,11 +93,7 @@ const App: React.FC = () => {
               <div className="features-grid">
                 <div className="feature-card">
                   <div className="feature-image-container">
-                    <img
-                      src={require("./images/lupa.png")}
-                      alt="Ícone de lupa - Dados de saúde"
-                      className="feature-image"
-                    />
+                    <img src={require("./images/lupa.png")} alt="Ícone de lupa - Dados de saúde" className="feature-image" />
                   </div>
                   <div className="feature-content">
                     <h2 className="feature-title">Conheça dados importantes de saúde</h2>
@@ -161,17 +101,13 @@ const App: React.FC = () => {
                       Acesse seu prontuário, resultados de exames e vacinas registradas em um só lugar.
                     </p>
                     <button className="feature-button">
-                      <Link to="/dados-saude">Clique aqui →</Link>
+                      <Link to="/dados-saude" style={{ textDecoration: "none", color: "white" }}>Clique aqui →</Link>
                     </button>
                   </div>
                 </div>
                 <div className="feature-card">
                   <div className="feature-image-container">
-                    <img
-                      src={require("./images/medic.png")}
-                      alt="Ícone de localização"
-                      className="feature-image"
-                    />
+                    <img src={require("./images/medic.png")} alt="Ícone de localização" className="feature-image" />
                   </div>
                   <div className="feature-content">
                     <h2 className="feature-title">Veja a unidade mais próxima</h2>
@@ -179,17 +115,13 @@ const App: React.FC = () => {
                       Encontre facilmente postos, clínicas e hospitais do SUS pelo mapa interativo.
                     </p>
                     <button className="feature-button">
-                      <Link to="/unidades-proximas">Clique aqui →</Link>
+                      <Link to="/unidades-proximas" style={{ textDecoration: "none", color: "white" }}>Clique aqui →</Link>
                     </button>
                   </div>
                 </div>
                 <div className="feature-card">
                   <div className="feature-image-container">
-                    <img
-                      src={require("./images/paper.png")}
-                      alt="Ícone de jogo"
-                      className="feature-image"
-                    />
+                    <img src={require("./images/paper.png")} alt="Ícone de jogo" className="feature-image" />
                   </div>
                   <div className="feature-content">
                     <h2 className="feature-title">Aprenda enquanto joga</h2>
@@ -197,79 +129,145 @@ const App: React.FC = () => {
                       Conheça nosso jogo sobre saúde e transforme conhecimento em prática de forma divertida.
                     </p>
                     <button className="feature-button">
-                      <Link to="/jogar">Clique aqui →</Link>
+                      <Link to="/jogar" style={{ textDecoration: "none", color: "white" }} onClick={handleJogarClick}>Clique aqui →</Link>
                     </button>
                   </div>
                 </div>
               </div>
             </div>
           </section>
+          <section className="footer-section" >
+            <footer className="footer">
+              <div className="footer-logos">
+                <img src={require("./images/inova.png")} alt="Logo INOVA" className="footer-logo" />
+                <img src={require("./images/icon2.png")} alt="Logo Governo" className="footer-logo" />
+                <img src={require("./images/secti.png")} alt="Logo SECTI" className="footer-logo" />
+              </div>
+              <div className="footer-contact">Contato: conectasusgp2@gmail.com</div>
+            </footer>
+          </section>
         </>
       )}
       <div className="modal-wrapper">
         <Routes>
-          <Route path="/" element={<Home />} />
           <Route path="/esqueci-senha" element={<h1>Recuperação de Senha</h1>} />
-          <Route path="/sobre" element={<Sobre />} />
-          <Route path="/contato" element={<Contato />} />
           <Route path="/jogar" element={<ProtectedRoute><Jogar /></ProtectedRoute>} />
-          <Route path="/unidades" element={<h1>Consultar Unidades</h1>} />
-          <Route path="/dashboard" element={<h1>Dashboard</h1>} />
           <Route path="/dados-saude" element={<h1>Dados de Saúde</h1>} />
           <Route path="/unidades-proximas" element={<h1>Unidades Próximas</h1>} />
         </Routes>
       </div>
-      <footer className="footer">
-        <div className="footer-logos">
-          <img src={require("./images/inova.png")} alt="Logo INOVA" className="footer-logo" />
-          <img src={require("./images/icon2.png")} alt="Logo Governo" className="footer-logo" />
-          <img src={require("./images/secti.png")} alt="Logo SECTI" className="footer-logo" />
-        </div>
-        <div className="footer-contact">Contato: conectasusgp2@gmail.com</div>
-      </footer>
-      {/* Wrapper para modais */}
-      
       {showLogin && (
-        <div className="modal-overlay" onClick={(e) => {
-          if (e.target === e.currentTarget) setShowLogin(false)
-        }}>
-          <Login
-            onClose={() => setShowLogin(false)}
-            onCadastroClick={handleCadastroClick}
-            onEsqueciSenhaClick={handleEsqueciSenhaClick}
-            onLoginSuccess={handleLoginSuccess} />
+        <div className="modal-overlay" onClick={(e) => { if (e.target === e.currentTarget) setShowLogin(false) }}>
+          <Login onClose={() => setShowLogin(false)} onCadastroClick={handleCadastroClick} onEsqueciSenhaClick={handleEsqueciSenhaClick} onLoginSuccess={handleLoginSuccess} />
         </div>
       )}
       {showCadastro && (
-        <div className="modal-overlay" onClick={(e) => {
-          if (e.target === e.currentTarget) setShowCadastro(false);
-        }}>
-          <Cadastro
-            onClose={() => setShowCadastro(false)}
-            onLoginClick={handleGoToLogin} />
+        <div className="modal-overlay" onClick={(e) => { if (e.target === e.currentTarget) setShowCadastro(false); }}>
+          <Cadastro onClose={() => setShowCadastro(false)} onLoginClick={handleGoToLogin} />
         </div>
       )}
-      {showEsqueciSenha && ( // [Mudança] Novo modal
-        <div className="modal-overlay" onClick={(e) => {
-          if (e.target === e.currentTarget) setShowEsqueciSenha(false);
-        }}>
-          <EsqueciSenha
-            onClose={() => setShowEsqueciSenha(false)}
-            onLoginClick={handleGoToLogin}
-            onRedefinirSenhaClick={handleRedefinirSenhaClick} />
+      {showEsqueciSenha && (
+        <div className="modal-overlay" onClick={(e) => { if (e.target === e.currentTarget) setShowEsqueciSenha(false); }}>
+          <EsqueciSenha onClose={() => setShowEsqueciSenha(false)} onLoginClick={handleGoToLogin} onRedefinirSenhaClick={handleRedefinirSenhaClick} />
         </div>
       )}
-      {showRedefinirSenha && ( // [Mudança] Novo modal
+      {showRedefinirSenha && (
         <div className="modal-overlay" onClick={(e) => {
           if (e.target === e.currentTarget) setShowRedefinirSenha(false);
         }}>
-          <RedefinirSenha
-            onClose={() => setShowRedefinirSenha(false)}
-            onLoginClick={handleGoToLogin} />
+          <RedefinirSenha onClose={() => setShowRedefinirSenha(false)} onLoginClick={handleGoToLogin} />
         </div>
       )}
-    </div>
-  );
-};
-
+      {showConsulta && (
+        <div className="modal-overlay" onClick={() => setShowConsulta(false)} style={{position: 'fixed',top: 0,left: 0,right: 0,bottom: 0,backgroundColor: 'rgba(0,0,0,0.5)',overflow: 'hidden',zIndex: 1000}}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{position: 'absolute',top: '50%',left: '50%',transform: 'translate(-50%, -50%)',width: '100%',maxHeight: '100vh',overflowY: 'auto',}}>
+            <section className="consulta" style={{width: '100%',minHeight: '1200px',backgroundImage: `url(${require("./images/home.png")})`,backgroundSize: 'cover',backgroundRepeat: 'no-repeat',backgroundPosition: 'center',position: 'relative'}}>
+              <div style={{position: 'absolute',top: 0,left: 0,width: '100%',minHeight: '1200px',backgroundColor: 'rgba(0, 0, 0, 0.5)'}}>
+                <button onClick={() => setShowConsulta(false)} style={{position: 'fixed',top: '20px',right: '20px',zIndex: 1001,padding: '10px 20px',backgroundColor: '#fff',border: 'none',borderRadius: '5px',cursor: 'pointer'}}>
+                  Fechar
+                </button>
+                <div style={{padding: '50px',paddingTop: '100px',paddingLeft: '250px',opacity: 25}}>
+                  <div style={{paddingLeft: "20px",width: "800px",height: "200px",backgroundColor: " rgba(255, 255, 255, 0.5)",borderRadius: "30px",padding: "20px",display: "flex",flexDirection: "column",gap: "15px",zIndex: 3000}}>
+                    <input type="text"placeholder="Buscar..."style={{padding: "10px",borderRadius: "20px",border: "none",outline: "none",width: "100%",zIndex: 3000,boxShadow: "0 0 10px rgba(0, 0, 0, 0.3)"}}/>
+                    <div style={{ display: "flex", gap: "10px", position: "relative", paddingTop: "40px" }}>
+                      <div style={{ flex: 1, position: "relative" }}>
+                        <div onClick={() => setOpenDropdown(openDropdown === 1 ? null : 1)}style={{padding: "10px",backgroundColor: "white",color: "black",borderRadius: "20px",cursor: "pointer",textAlign: "center"}}>
+                          Tipo
+                        </div>
+                        {openDropdown === 1 && (
+                          <div style={{position: "absolute",top: "100%",left: 0,right: 0,backgroundColor: "#222",borderRadius: "4px",marginTop: "5px",zIndex: 100}}>
+                            {["Clínica", "Hospital", "UPA"].map((opcao) => (
+                              <div key={opcao}onClick={() => console.log("Selecionado:", opcao)}style={{padding: "8px",color: "white",cursor: "pointer",}}>
+                                {opcao}
+                              </div>))}
+                          </div>)}
+                      </div>
+                      <div style={{ flex: 1, position: "relative" }}>
+                        <div onClick={() => setOpenDropdown(openDropdown === 2 ? null : 2)}style={{padding: "10px",backgroundColor: "white",color: "black",borderRadius: "20px",cursor: "pointer",textAlign: "center"}}>
+                          Bairro
+                        </div>
+                        {openDropdown === 2 && (
+                          <div style={{position: "absolute",top: "100%",left: 0,right: 0,backgroundColor: "#222",borderRadius: "4px",marginTop: "5px",zIndex: 100}}>
+                            {["Centro", "Vila Nova", "Jardins"].map((opcao) => (
+                              <div key={opcao}onClick={() => console.log("Selecionado:", opcao)}style={{padding: "8px", color: "white",cursor: "pointer"}}>
+                                {opcao}
+                              </div>))}
+                          </div>)}
+                      </div>
+                      <div style={{ flex: 1, position: "relative" }}>
+                        <div onClick={() => setOpenDropdown(openDropdown === 3 ? null : 3)}style={{padding: "10px",backgroundColor: "white",color: "BLACK",borderRadius: "20px",cursor: "pointer",textAlign: "center"}}>
+                          Serviço
+                        </div>
+                        {openDropdown === 3 && (
+                          <div style={{position: "absolute",top: "100%",left: 0,right: 0,backgroundColor: "#222",borderRadius: "4px",marginTop: "5px",zIndex: 100}}>
+                            {["Consulta", "Exames", "Emergência"].map((opcao) => (
+                              <div key={opcao}onClick={() => console.log("Selecionado:", opcao)}style={{padding: "8px",color: "white",cursor: "pointer",}}>
+                                {opcao}
+                              </div>))}
+                          </div>)}
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{ height: '500px' }}></div>
+                </div>
+                {showMap && (
+                  <div style={{position: "fixed",top: "110%",right: "50px",transform: "translateY(-50%)",backgroundColor: "white",height: "600px",width: "500px",borderRadius: "20px",zIndex: 1002,boxShadow: "0 0 20px rgba(0,0,0,0.5)"}}>
+                    <button onClick={() => setShowMap(false)}style={{position: "absolute",top: "10px",left: "10px",zIndex: 1003,padding: "5px 10px",backgroundColor: "red",color: "white",border: "none",borderRadius: "5px",cursor: "pointer"}}>
+                      Fechar
+                    </button>
+                    <div style={{height: "100%",width: "100%",display: "flex",justifyContent: "center",alignItems: "center",fontSize: "20px"}}>
+                      Conteúdo do Mapa
+                    </div>
+                  </div>)}
+                <div
+                  style={{position: "absolute",top: "60%",left: "22%",transform: "translate(-50%, -50%)",backgroundColor: "white",height: "600px",width: "500px",padding: "10px",borderRadius: "20px",overflow: "hidden"}}>
+                  <div style={{height: "100%",overflowY: "auto",scrollbarWidth: "none",msOverflowStyle: "none",paddingRight: "20px",marginRight: "-20px"}}>
+                    {[...Array(15)].map((_, index) => (
+                      <div key={index} style={{backgroundColor: "gray",padding: "15px",marginBottom: "10px",borderRadius: "6px",display: "flex",alignItems: "center"}}>
+                        <div style={{ flex: 1 }}>
+                          <p style={{ color: "white", margin: 0 }}>Sem dados</p>
+                          <p style={{ color: "#aaa", margin: "5px 0 0 0" }}>Endereço: Sem dados</p>
+                        </div>
+        
+                        <button onClick={() => setShowMap(true)}style={{backgroundColor: "#4285F4",color: "white",border: "none",padding: "8px 15px",borderRadius: "4px",cursor: "pointer"}}>
+                          Maps
+                        </button>
+                      </div>))}
+                  </div>
+                </div>
+              </div>
+              <section className="footer-section" style={{top: "1200px", position: "relative"}}>	
+                <footer className="footer">
+                  <div className="footer-logos">
+                    <img src={require("./images/inova.png")} alt="Logo INOVA" className="footer-logo" />
+                    <img src={require("./images/icon2.png")} alt="Logo Governo" className="footer-logo" />
+                    <img src={require("./images/secti.png")} alt="Logo SECTI" className="footer-logo" />
+                  </div>
+                  <div className="footer-contact">Contato: conectasusgp2@gmail.com</div>
+                </footer>
+              </section>
+            </section>
+          </div>
+        </div>)}
+    </div>);};
 export default App;
