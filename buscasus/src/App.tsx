@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react"
 import "./App.css";
 import homeImage from "./images/home.png";
-import iconImage from "./images/icon.png";
+import iconImage from "./images/icon2.png";
 import { Route, Routes, Navigate, Link, useNavigate, useLocation } from "react-router-dom";
 import Login from "./components/login/Login";
 import Cadastro from "./components/cadastro/Cadastro";
@@ -37,32 +37,29 @@ const App: React.FC = () => {
       <header className="header">
         <div className="container">
           <div className="logo">
-            <img src={iconImage} alt="ConectaSUS Logo" />
+            <img src={iconImage} alt="BuscaSUS Logo" />
           </div>
           <nav className="nav">
-            <a href="#"></a>
             <button className="nav-link" onClick={handleLoginClick}>Login</button>
           </nav>
         </div>
       </header>
-      {isHomePage && (
-        <>
+      {isHomePage && (<>
           <section className="hero" style={{ height: "700px" }}>
             <div className="hero-background" style={{ backgroundImage: `url(${homeImage})` }}></div>
             <div className="container">
               <div className="hero-content">
                 <div className="hero-left">
-                  <h1 className="hero-title">ConectaSUS</h1>
+                  <h1 className="hero-title">BuscaSUS</h1>
                   <h2 className="hero-subtitle">Acesse informações relevantes de saúde</h2>
                   <p className="hero-description">
-                    O ConectaSUS é um portal digital que facilita o acesso aos serviços do SUS. Consulte vacinação, exames,
+                    O BuscaSUS é um portal digital que facilita o acesso aos serviços do SUS. Consulte vacinação, exames,
                     atendimentos e encontre unidades de saúde de forma simples, rápida e integrada.
                   </p>
                   <div className="hero-buttons" style={{ marginLeft: "800px" }}>
                     <button className="btn" style={{ marginTop: "-300px" }} onClick={() => setShowConsulta(true)}>
                       Consultar unidades →
                     </button>
-
                     <button className="btn" style={{ marginTop: "20px" }} onClick={handleJogarClick}>
                       Jogar agora
                     </button>
@@ -75,12 +72,12 @@ const App: React.FC = () => {
             <div className="container">
               <h2 className="about-title">Sobre o projeto</h2>
               <p className="about-description">
-                O ConectaSUS é a sua porta de entrada para uma saúde pública mais acessível e transparente. Descubra nossos
+                O BuscaSUS é a sua porta de entrada para uma saúde pública mais acessível e transparente. Descubra nossos
                 serviços e experimente uma nova forma de gerenciar seu cuidado com agilidade e confiança.
               </p>
               <div className="about-box">
                 <p className="about-box-text">
-                  No ConectaSUS, cada detalhe foi pensado para você. Aqui, a tecnologia anda de mãos dadas com o cuidado:
+                  Cada detalhe foi pensado para você. Aqui, a tecnologia anda de mãos dadas com o cuidado:
                   facilitamos o acesso à informação, aos serviços de saúde e ao seu histórico, porque acreditamos que estar
                   bem informado é o primeiro passo para ser bem cuidado.
                 </p>
@@ -143,11 +140,9 @@ const App: React.FC = () => {
                 <img src={require("./images/icon2.png")} alt="Logo Governo" className="footer-logo" />
                 <img src={require("./images/secti.png")} alt="Logo SECTI" className="footer-logo" />
               </div>
-              <div className="footer-contact">Contato: conectasusgp2@gmail.com</div>
+              <div className="footer-contact">Contato: buscasusgp2@gmail.com</div>
             </footer>
-          </section>
-        </>
-      )}
+          </section></>)}
       <div className="modal-wrapper">
         <Routes>
           <Route path="/esqueci-senha" element={<h1>Recuperação de Senha</h1>} />
@@ -159,8 +154,7 @@ const App: React.FC = () => {
       {showLogin && (
         <div className="modal-overlay" onClick={(e) => { if (e.target === e.currentTarget) setShowLogin(false) }}>
           <Login onClose={() => setShowLogin(false)} onCadastroClick={handleCadastroClick} onEsqueciSenhaClick={handleEsqueciSenhaClick} onLoginSuccess={handleLoginSuccess} />
-        </div>
-      )}
+        </div>)}
       {showCadastro && (
         <div className="modal-overlay" onClick={(e) => { if (e.target === e.currentTarget) setShowCadastro(false); }}>
           <Cadastro onClose={() => setShowCadastro(false)} onLoginClick={handleGoToLogin} />
@@ -188,7 +182,6 @@ const App: React.FC = () => {
                 </button>
                 <div style={{padding: '50px',paddingTop: '100px',paddingLeft: '250px',opacity: 25}}>
                   <div style={{paddingLeft: "20px",width: "800px",height: "200px",backgroundColor: " rgba(255, 255, 255, 0.5)",borderRadius: "30px",padding: "20px",display: "flex",flexDirection: "column",gap: "15px",zIndex: 3000}}>
-                    <input type="text"placeholder="Buscar..."style={{padding: "10px",borderRadius: "20px",border: "none",outline: "none",width: "100%",zIndex: 3000,boxShadow: "0 0 10px rgba(0, 0, 0, 0.3)"}}/>
                     <div style={{ display: "flex", gap: "10px", position: "relative", paddingTop: "40px" }}>
                       <div style={{ flex: 1, position: "relative" }}>
                         <div onClick={() => setOpenDropdown(openDropdown === 1 ? null : 1)}style={{padding: "10px",backgroundColor: "white",color: "black",borderRadius: "20px",cursor: "pointer",textAlign: "center"}}>
