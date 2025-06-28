@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./Login.css";
-import logoImage from "../../images/icon.png";
+import logoImage from "../../images/icon2.png";
 
 
 interface LoginState {
@@ -53,7 +53,7 @@ const Login: React.FC<LoginProps> = ({ onClose, onCadastroClick, onEsqueciSenhaC
           &larr;
         </button>
         <div className="login-header-container">
-          <img src={logoImage} alt="ConectaSUS Logo" className="login-logo" />
+          <img src={logoImage} alt="BuscaSUS Logo" className="login-logo" />
         </div>
         <form className=" form-container">
           <h2 className="login-header">Login</h2>
@@ -72,13 +72,6 @@ const Login: React.FC<LoginProps> = ({ onClose, onCadastroClick, onEsqueciSenhaC
               className="login-input"
               placeholder="Senha"
             />
-            <Link
-              to="/esqueci-senha"
-              className="forgot-password"
-              onClick={(e) => { e.preventDefault(); onEsqueciSenhaClick(); }}
-            >
-              Esqueceu a senha?
-            </Link>
             <span
               className="toggle-password"
               onClick={() => setState((prev) => ({ ...prev, showPassword: !prev.showPassword }))}
@@ -86,7 +79,13 @@ const Login: React.FC<LoginProps> = ({ onClose, onCadastroClick, onEsqueciSenhaC
               {state.showPassword ? "👁️" : "👁️‍🗨️"}
             </span>
           </div>
-
+            <Link
+              to="/esqueci-senha"
+              className="forgot-password"
+              onClick={(e) => { e.preventDefault(); onEsqueciSenhaClick(); }}
+            >
+              Esqueceu a senha?
+            </Link>
           {state.error && <p className="error">{state.error}</p>}
           <button type="button" className="login-button" onClick={handleLogin}>
             Entrar

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css"; // Reutiliza o CSS unificado
-import logoImage from "../../images/icon.png";
+import logoImage from "../../images/icon2.png";
 
 interface EsqueciSenhaState {
   email: string;
