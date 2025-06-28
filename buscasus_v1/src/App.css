@@ -478,64 +478,6 @@ body {
     padding-top: 10px;
   }
 
-  .menu-toggle {
-    display: block;
-    position: absolute;
-    right: 1rem;
-    top: 1.5rem;
-    z-index: 1001;
-  }
-
-  .nav {
-    position: absolute;
-    top: 70px;
-    left: 0;
-    width: 100%;
-    background-color: #8AE7FD;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.5s ease-out;
-    z-index: 999;
-  }
-
-  .nav.open {
-    max-height: 500px;
-  }
-
-  .nav a {
-    transform: translateY(-20px);
-    animation: slideDown 0.3s forwards;
-  }
-
-  .nav.open a:nth-child(1) {
-    animation-delay: 0.05s;
-  }
-
-  .nav.open a:nth-child(2) {
-    animation-delay: 0.1s;
-  }
-
-  .nav.open a:nth-child(3) {
-    animation-delay: 0.15s;
-  }
-
-  .nav.open a:nth-child(4) {
-    animation-delay: 0.2s;
-  }
-
-  .nav.open a:nth-child(5) {
-    animation-delay: 0.25s;
-  }
-
-  @keyframes slideDown {
-    to {
-      transform: translateY(0);
-    }
-  }
-
   .hero-title {
     font-size: 3.5rem;
     font-weight: bold;
