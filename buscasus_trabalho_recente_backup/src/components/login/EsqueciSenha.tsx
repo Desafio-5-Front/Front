@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // Removido useNavigate, não está sendo usado diretamente no componente EsqueciSenha
 import "./Login.css"; // Reutiliza o CSS unificado
-import logoImage from "../../images/icon.png";
+import logoImage from "../../images/icon2.png";
 import axios from "axios"; // Importa o Axios
 
 interface EsqueciSenhaState {

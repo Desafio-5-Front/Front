@@ -100,10 +100,11 @@
   /* Regular */
   font-size: 11px;
   color: #000000;
-  position: absolute;
-  bottom: -5px;
-  right: 00px;
-  padding-top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: -10px;
+  margin-bottom: 10px;
 }
 
 .login-button {
@@ -137,6 +138,75 @@
   border: none;
   font-size: 16px;
   font-family: "Inter", sans-serif;
+}
+
+@media (max-width: 768px) {
+    .login-box {
+    flex-direction: column;
+    width: 90vw;
+    max-width: 400px;
+    min-width: 0;
+    height: auto;
+    margin: 40px auto;
+    padding: 15px 5px;
+    gap: 20px;
+  }
+
+.login-logo {
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 10px auto;
+    display: block;
+}
+
+.form-container {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0 5px;
+    gap: 15px;
+}
+
+.login-header {
+    font-size: 22px;
+    text-align: center;
+}
+
+.login-input,
+.login-button {
+    width: 100%;
+    max-width: 100%;
+}
+
+.password-container {
+    width: 100%;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.toggle-password {
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+}
+
+.forgot-password {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  color: #000000;
+  display: block;
+  width: 100%;
+  padding-top: 5px;
+  text-align: right;
+  margin-bottom: 10px;
+}
+}
+
+@media (max-width: 480px) {
 
 }
 

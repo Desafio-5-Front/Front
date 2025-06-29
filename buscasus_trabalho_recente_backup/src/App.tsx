@@ -9,7 +9,6 @@ import Cadastro from "./components/cadastro/Cadastro";
 import EsqueciSenha from "./components/login/EsqueciSenha";
 import RedefinirSenha from "./components/login/RedefinirSenha";
 import Jogar from "./jogar/Jogar"
-import { setDefaultAutoSelectFamilyAttemptTimeout } from "net";
 import axios from "axios";
 
 interface BaseProps {
@@ -195,7 +194,7 @@ const App: React.FC = () => {
                     O BuscaSUS é um portal digital que facilita o acesso aos serviços do SUS. Consulte vacinação, exames,
                     atendimentos e encontre unidades de saúde de forma simples, rápida e integrada.
                   </p>
-                  <div className="hero-buttons" style={{ marginLeft: "800px" }}>
+                  <div className="hero-buttons">
                     <button className="btn" style={{ marginTop: "-300px" }} onClick={() => setShowConsulta(true)}>
                       Consultar unidades →
                     </button>

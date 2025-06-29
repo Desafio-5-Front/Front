@@ -134,3 +134,111 @@
   padding: 5px;
 }
 
+@media (max-width: 768px) {
+  .cadastro-container {
+    min-height: 100vh;
+    padding: 20px 0;
+  }
+
+  .cadastro-box {
+    flex-direction: column;
+    width: 50vw;
+    min-width: 0;
+    height: auto;
+    margin: 40px auto;
+    padding: 20px 10px;
+    gap: 30px;
+  }
+
+  .cadastro-logo {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 20px auto;
+    display: block;
+  }
+
+  .formulario-container {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0 10px;
+    gap: 15px;
+  }
+
+  .cadastro-header {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .cadastro-input,
+  .cadastro-button {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .forgot-password {
+    font-size: 11px;
+    position: relative;
+    right: 0;
+    bottom: 0;
+    padding-top: 5px;
+    text-align: right;
+  }
+  .password-container {
+    width: 100%;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+  }
+}
+@media (max-width: 480px) {
+  .cadastro-container {
+    min-height: 100vh;
+    padding: 20px 0;
+  }
+
+  .cadastro-box {
+    flex-direction: column;
+    width: 70vw;
+    min-width: 0;
+    height: auto;
+    margin: 40px auto;
+    padding: 20px 10px;
+    gap: 10px;
+  }
+
+  .cadastro-logo {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 10px auto;
+    display: block;
+  }
+
+  .form-container {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0 10px;
+    gap: 15px;
+  }
+
+  .login-header {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .cadastro-input,
+  .cadastro-button {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .forgot-password {
+    font-size: 11px;
+    position: relative;
+    right: 0;
+    bottom: 0;
+    padding-top: 5px;
+    text-align: right;
+  }
+}

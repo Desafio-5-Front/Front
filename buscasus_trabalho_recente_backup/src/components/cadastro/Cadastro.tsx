@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./Cadastro.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import logoImage from "../../images/icon.png"
+import logoImage from "../../images/icon2.png"
 import axios from "axios"; // Importa o Axios
+
 
 // Define a interface para o componente Cadastro
 interface CadastroState {
