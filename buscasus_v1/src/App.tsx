@@ -8,6 +8,8 @@ import Login from "./components/login/Login";
 import Cadastro from "./components/cadastro/Cadastro";
 import EsqueciSenha from "./components/login/EsqueciSenha";
 import RedefinirSenha from "./components/login/RedefinirSenha";
+import HealthUnitsSearch from "./components/HealthUnitsSearch/HealthUnitsSearch";
+
 import Jogar from "./jogar/Jogar"
 import axios from "axios";
 
@@ -26,8 +28,6 @@ const App: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [showConsulta, setShowConsulta] = React.useState(false);
-  const [showMap, setShowMap] = React.useState(false);
-  const [openDropdown, setOpenDropdown] = React.useState<number | null>(null);
   const [showLogin, setShowLogin] = React.useState(false);
   const [showCadastro, setShowCadastro] = React.useState(false);
   const [showEsqueciSenha, setShowEsqueciSenha] = React.useState(false);
@@ -349,94 +349,11 @@ const App: React.FC = () => {
       )}
       {showConsulta && (
         <div className="modal-overlay" onClick={() => setShowConsulta(false)} style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.5)', overflow: 'hidden', zIndex: 1000 }}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '100%', maxHeight: '100vh', overflowY: 'auto', }}>
-            <section className="consulta" style={{ width: '100%', minHeight: '1200px', backgroundImage: `url(${require("./images/home.png")})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', position: 'relative' }}>
-              <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', minHeight: '1200px', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
-                <button onClick={() => setShowConsulta(false)} style={{ position: 'fixed', top: '20px', right: '20px', zIndex: 1001, padding: '10px 20px', backgroundColor: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
-                  Fechar
-                </button>
-                <div style={{ padding: '50px', paddingTop: '100px', paddingLeft: '250px', opacity: 25 }}>
-                  <div style={{ paddingLeft: "20px", width: "800px", height: "200px", backgroundColor: " rgba(255, 255, 255, 0.5)", borderRadius: "30px", padding: "20px", display: "flex", flexDirection: "column", gap: "15px", zIndex: 3000 }}>
-                    <div style={{ display: "flex", gap: "10px", position: "relative", paddingTop: "40px" }}>
-                      <div style={{ flex: 1, position: "relative" }}>
-                        <div onClick={() => setOpenDropdown(openDropdown === 1 ? null : 1)} style={{ padding: "10px", backgroundColor: "white", color: "black", borderRadius: "20px", cursor: "pointer", textAlign: "center" }}>
-                          Tipo
-                        </div>
-                        {openDropdown === 1 && (
-                          <div style={{ position: "absolute", top: "100%", left: 0, right: 0, backgroundColor: "#222", borderRadius: "4px", marginTop: "5px", zIndex: 100 }}>
-                            {["Clínica", "Hospital", "UPA"].map((opcao) => (
-                              <div key={opcao} onClick={() => console.log("Selecionado:", opcao)} style={{ padding: "8px", color: "white", cursor: "pointer", }}>
-                                {opcao}
-                              </div>))}
-                          </div>)}
-                      </div>
-                      <div style={{ flex: 1, position: "relative" }}>
-                        <div onClick={() => setOpenDropdown(openDropdown === 2 ? null : 2)} style={{ padding: "10px", backgroundColor: "white", color: "black", borderRadius: "20px", cursor: "pointer", textAlign: "center" }}>
-                          Bairro
-                        </div>
-                        {openDropdown === 2 && (
-                          <div style={{ position: "absolute", top: "100%", left: 0, right: 0, backgroundColor: "#222", borderRadius: "4px", marginTop: "5px", zIndex: 100 }}>
-                            {["Centro", "Vila Nova", "Jardins"].map((opcao) => (
-                              <div key={opcao} onClick={() => console.log("Selecionado:", opcao)} style={{ padding: "8px", color: "white", cursor: "pointer" }}>
-                                {opcao}
-                              </div>))}
-                          </div>)}
-                      </div>
-                      <div style={{ flex: 1, position: "relative" }}>
-                        <div onClick={() => setOpenDropdown(openDropdown === 3 ? null : 3)} style={{ padding: "10px", backgroundColor: "white", color: "BLACK", borderRadius: "20px", cursor: "pointer", textAlign: "center" }}>
-                          Serviço
-                        </div>
-                        {openDropdown === 3 && (
-                          <div style={{ position: "absolute", top: "100%", left: 0, right: 0, backgroundColor: "#222", borderRadius: "4px", marginTop: "5px", zIndex: 100 }}>
-                            {["Consulta", "Exames", "Emergência"].map((opcao) => (
-                              <div key={opcao} onClick={() => console.log("Selecionado:", opcao)} style={{ padding: "8px", color: "white", cursor: "pointer", }}>
-                                {opcao}
-                              </div>))}
-                          </div>)}
-                      </div>
-                    </div>
-                  </div>
-                  <div style={{ height: '500px' }}></div>
-                </div>
-                {showMap && (
-                  <div style={{ position: "fixed", top: "110%", right: "50px", transform: "translateY(-50%)", backgroundColor: "white", height: "600px", width: "500px", borderRadius: "20px", zIndex: 1002, boxShadow: "0 0 20px rgba(0,0,0,0.5)" }}>
-                    <button onClick={() => setShowMap(false)} style={{ position: "absolute", top: "10px", left: "10px", zIndex: 1003, padding: "5px 10px", backgroundColor: "red", color: "white", border: "none", borderRadius: "5px", cursor: "pointer" }}>
-                      Fechar
-                    </button>
-                    <div style={{ height: "100%", width: "100%", display: "flex", justifyContent: "center", alignItems: "center", fontSize: "20px" }}>
-                      Conteúdo do Mapa
-                    </div>
-                  </div>)}
-                <div
-                  style={{ position: "absolute", top: "60%", left: "22%", transform: "translate(-50%, -50%)", backgroundColor: "white", height: "600px", width: "500px", padding: "10px", borderRadius: "20px", overflow: "hidden" }}>
-                  <div style={{ height: "100%", overflowY: "auto", scrollbarWidth: "none", msOverflowStyle: "none", paddingRight: "20px", marginRight: "-20px" }}>
-                    {[...Array(15)].map((_, index) => (
-                      <div key={index} style={{ backgroundColor: "gray", padding: "15px", marginBottom: "10px", borderRadius: "6px", display: "flex", alignItems: "center" }}>
-                        <div style={{ flex: 1 }}>
-                          <p style={{ color: "white", margin: 0 }}>Sem dados</p>
-                          <p style={{ color: "#aaa", margin: "5px 0 0 0" }}>Endereço: Sem dados</p>
-                        </div>
-
-                        <button onClick={() => setShowMap(true)} style={{ backgroundColor: "#4285F4", color: "white", border: "none", padding: "8px 15px", borderRadius: "4px", cursor: "pointer" }}>
-                          Maps
-                        </button>
-                      </div>))}
-                  </div>
-                </div>
-              </div>
-              <section className="footer-section" style={{ top: "1200px", position: "relative" }}>
-                <footer className="footer">
-                  <div className="footer-logos">
-                    <img src={require("./images/inova.png")} alt="Logo INOVA" className="footer-logo" />
-                    <img src={require("./images/icon2.png")} alt="Logo Governo" className="footer-logo" />
-                    <img src={require("./images/secti.png")} alt="Logo SECTI" className="footer-logo" />
-                  </div>
-                  <div className="footer-contact">Contato: conectasusgp2@gmail.com</div>
-                </footer>
-              </section>
-            </section>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '100%', maxHeight: '100vh', overflowY: 'auto' }}>
+            <HealthUnitsSearch />
           </div>
-        </div>)}
+        </div>
+      )}
     </div>);
 };
 export default App;
