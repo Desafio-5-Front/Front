@@ -65,30 +65,131 @@ const EsqueciSenha: React.FC<EsqueciSenhaProps> = ({ onClose, onLoginClick, onRe
   };
 
   return (
-    <div className="login-container" onClick={(e) => e.stopPropagation()}>
-      <div className="login-box">
-        <button className="back-button" onClick={onClose}>
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      minHeight: '100vh'
+    }} onClick={(e) => e.stopPropagation()}>
+      <div style={{
+        display: 'flex',
+        width: '1006px',
+        height: '556px',
+        background: 'white',
+        borderRadius: '29px',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+        margin: '191px 201px 210px 224px',
+        gap: '70px',
+        paddingTop: '30px'
+      }}>
+        <button style={{
+          position: 'absolute',
+          top: '10px',
+          left: '1000px',
+          background: 'none',
+          border: 'none',
+          fontSize: '24px',
+          cursor: 'pointer',
+          color: '#000',
+          padding: '5px'
+        }} onClick={onClose}>
           ←
         </button>
-        <div className="login-header-container">
-          <img src={logoImage} alt="ConectaSUS Logo" className="login-logo" />
+
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+          <img src={logoImage} alt="ConectaSUS Logo" style={{
+            width: '398px',
+            height: '398px',
+            marginRight: '20px'
+          }} />
         </div>
-        <form className="form-container">
-          <h2 className="login-header">Esqueceu a Senha?</h2>
+
+        <form style={{
+          justifyContent: 'center',
+          display: 'flex',
+          flexDirection: 'column',
+          width: '398px',
+          height: '500px',
+          alignItems: 'center',
+          margin: '10px',
+          gap: '20px',
+          marginLeft: '50px',
+          marginTop: '20px'
+        }}>
+          <h2 style={{
+            fontFamily: '"Inter", sans-serif',
+            fontWeight: 800,
+            fontSize: '30px',
+            color: '#000000',
+            paddingTop: '-50px'
+          }}>
+            Esqueceu a Senha?
+          </h2>
+
           <input
             type="email"
             value={state.email}
             onChange={(e) => setState((prev) => ({ ...prev, email: e.target.value }))}
-            className="login-input"
+            style={{
+              width: '327px',
+              height: '50px',
+              border: '1px solid #ccc',
+              borderRadius: '5px',
+              fontFamily: '"Inter", sans-serif',
+              marginTop: '20px',
+              padding: '20px'
+            }}
             placeholder="E-mail"
           />
-          {state.error && <p className="error">{state.error}</p>}
-          {state.message && <p style={{ color: "green" }}>{state.message}</p>} {/* Exibe a mensagem de sucesso */}
-          <button type="button" className="login-button" onClick={handleSubmit}>
+
+          {state.error && <p style={{ color: 'red' }}>{state.error}</p>}
+          {state.message && <p style={{ color: 'green' }}>{state.message}</p>}
+
+          <button
+            type="button"
+            style={{
+              width: '327px',
+              height: '38px',
+              backgroundColor: '#689CFF',
+              color: '#FFFFFF',
+              fontFamily: '"Inter", sans-serif',
+              fontWeight: 600,
+              fontSize: '18px',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer'
+            }}
+            onClick={handleSubmit}
+          >
             Enviar
           </button>
-          <p className="login-link">
-            Lembrou a senha? <button type="button" className="login-link-bold" onClick={onLoginClick}>Voltar ao Login</button>
+
+          <p style={{
+            fontFamily: '"Inter", sans-serif',
+            fontWeight: 400,
+            fontSize: '16px',
+            color: '#000000',
+            textAlign: 'center'
+          }}>
+            Lembrou a senha?
+            <button
+              type="button"
+              style={{
+                fontWeight: 700,
+                textDecoration: 'underline',
+                color: '#000000',
+                border: 'none',
+                fontSize: '16px',
+                fontFamily: '"Inter", sans-serif',
+                background: 'none',
+                cursor: 'pointer',
+                padding: '0',
+                marginLeft: '5px'
+              }}
+              onClick={onLoginClick}
+            >
+              Voltar ao Login
+            </button>
           </p>
         </form>
       </div>
