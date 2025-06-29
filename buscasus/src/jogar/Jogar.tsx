@@ -11,7 +11,7 @@ const Jogar: React.FC = () => {
       width: "100vw", // 100% da largura da viewport
       height: "100vh", // 100% da altura da viewport
       boxSizing: "border-box", // Garante que padding não adicione largura/altura extra
-      
+      margin: "100px 0 0 0",
       zIndex: "9999", 
       backgroundColor: "#D3FCEA"
     }}>

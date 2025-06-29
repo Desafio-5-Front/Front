@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Login.css";
 import logoImage from "../../images/icon.png";
-
+import axios from "axios"; // Importa o Axios
 
 interface LoginState {
   email: string;
@@ -26,28 +26,60 @@ const Login: React.FC<LoginProps> = ({ onClose, onCadastroClick, onEsqueciSenhaC
     showPassword: false,
   });
 
-  
-  const handleLogin = () => {
-    const storedEmail = localStorage.getItem("userEmail");
-    const storedSenha = localStorage.getItem("userSenha");
+  const handleLogin = async () => {
+    setState((prev) => ({ ...prev, error: "" })); // Limpa erros anteriores
 
-    if (!storedEmail || !storedSenha) {
-      setState((prev) => ({ ...prev, error: "Nenhum usuário cadastrado. Use 'Cadastrar-se'." }));
+    if (!state.email || !state.senha) {
+      setState((prev) => ({ ...prev, error: "Por favor, preencha e-mail e senha." }));
       return;
     }
 
-    if (state.email === storedEmail && state.senha === storedSenha) {
-      localStorage.setItem("isLoggedIn", "true");
-      setState((prev) => ({ ...prev, error: "" }));
-      onLoginSuccess();
-    } else {
-      setState((prev) => ({ ...prev, error: "E-mail ou senha inválidos." }));
+    try {
+      const response = await axios.post("https://desafio-05-api.onrender.com/api/auth/login", {
+        email: state.email,
+        password: state.senha, // O backend espera 'password', não 'senha'
+      });
+
+      // Login bem-sucedido: Armazene o token JWT e marque como logado
+      localStorage.setItem("authToken", response.data.token); // Supondo que o token venha em 'response.data.token'
+      localStorage.setItem("isLoggedIn", "true"); // Flag para controle de rota protegida no frontend
+      setState((prev) => ({ ...prev, error: "" })); // Limpa qualquer erro após o sucesso
+      onLoginSuccess(); // Notifica o App.tsx para fechar o modal e navegar
+    } catch (error: unknown) { // Use 'unknown' para errors no catch
+      console.error("Erro ao tentar login:", error);
+
+      if (axios.isAxiosError(error)) { // Verifica se é um erro gerado pelo Axios
+        if (error.response) { // Verifica se há uma resposta do servidor (ex: status 4xx, 5xx)
+          const axiosResponseData = error.response.data; // Variável auxiliar para o TypeScript
+          setState((prev) => ({ ...prev, error: axiosResponseData.message || "Credenciais inválidas." }));
+        } else if (error.request) { // A requisição foi feita, mas não houve resposta (erro de rede, CORS, etc.)
+          setState((prev) => ({ ...prev, error: "Sem resposta do servidor. Verifique sua conexão ou o CORS." }));
+          console.error("Erro na requisição Axios (sem resposta):", error.request);
+        } else { // Algum outro erro ao configurar a requisição
+          setState((prev) => ({ ...prev, error: "Erro ao configurar a requisição. Tente novamente." }));
+          console.error("Erro na configuração da requisição Axios:", error.message);
+        }
+      } else { // Erro não relacionado ao Axios (ex: erro de programação)
+        setState((prev) => ({ ...prev, error: "Ocorreu um erro inesperado. Tente novamente." }));
+        console.error("Erro inesperado:", error);
+      }
     }
   };
 
-  return (
-    <div className="login-container" onClick={(e) => e.stopPropagation} >
+  // NOVO: Função para autenticação via Google
+  const handleGoogleLogin = () => {
+    // Redireciona o navegador para o endpoint de autenticação do Google no backend
+    // O backend será responsável por redirecionar para o Google e depois de volta ao frontend
+    window.location.href = "https://desafio-05-api.onrender.com/api/auth/google";
+  };
 
+  // NOVO: Função para autenticação via GitHub
+  const handleGitHubLogin = () => {
+    window.location.href = "https://desafio-05-api.onrender.com/api/auth/github";
+  };
+
+  return (
+    <div className="login-container" onClick={(e) => e.stopPropagation()} >
       <div className="login-box" >
         <button className="back-button" onClick={onClose}>
           &larr;
@@ -91,10 +123,28 @@ const Login: React.FC<LoginProps> = ({ onClose, onCadastroClick, onEsqueciSenhaC
           <button type="button" className="login-button" onClick={handleLogin}>
             Entrar
           </button>
+          <div className="social-login-buttons">
+            <button type="button" className="login-button google-login-button" onClick={handleGoogleLogin}>
+              <img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
+                alt="Google Icon"
+                className="icon"
+              />
+              Entrar com Google
+            </button>
+            {/* NOVO: Botão para login com GitHub */}
+            <button type="button" className="login-button github-login-button" onClick={handleGitHubLogin}>
+              <img
+                src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+                alt="GitHub Icon"
+                className="icon"
+              />
+              Entrar com GitHub
+            </button>
+          </div>
           <p className="login-link">
             Não tem uma conta?
-            <button className="login-link-bold" onClick={(e) => { e.stopPropagation(); onCadastroClick(); }}>Cadastre-se</button>
-
+            <button type="button" className="login-link-bold" onClick={(e) => { e.stopPropagation(); onCadastroClick(); }}>Cadastre-se</button>
           </p>
         </form>
       </div>
