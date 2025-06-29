@@ -4,7 +4,6 @@ import GoogleMap from "../Googlemap";
 import MessageModal from "../MessageModal";
 import './HealthUnitsSearch.css';
 
-
 interface HealthUnit {
     id: string;
     displayName?: {
@@ -14,7 +13,11 @@ interface HealthUnit {
     nationalPhoneNumber?: string;
 }
 
-const HealthUnitsSearch = () => {
+interface HealthUnitSearchProps {
+    onClose?: () => void;
+}
+
+const HealthUnitsSearch = ({ onClose }: HealthUnitSearchProps) => {
     const [category, setCategory] = useState<string>('');
     const [municipio, setMunicipio] = useState<string>('todos');
     const [municipios, setMunicipios] = useState<string[]>([]);
@@ -28,6 +31,22 @@ const HealthUnitsSearch = () => {
         formatted_address: string;
     } | null>(null);
     const [totalResults, setTotalResults] = useState<number>(0);
+
+    // Adiciona listener para tecla ESC
+    useEffect(() => {
+        if (!onClose) return;
+
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                onClose();
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [onClose]);
 
     const showMessageModal = (message: string) => {
         setModalMessage(message);
@@ -46,7 +65,7 @@ const HealthUnitsSearch = () => {
 
     const fetchUnits = async () => {
         if (!category) {
-            return; // Avoid clearing state unnecessarily
+            return;
         }
 
         setLoading(true);
@@ -59,7 +78,6 @@ const HealthUnitsSearch = () => {
 
             setTotalResults(total);
 
-           
         } catch (e) {
             console.error("Erro ao buscar unidades:", e);
             showMessageModal("Ocorreu um erro ao buscar os dados.");
@@ -84,7 +102,7 @@ const HealthUnitsSearch = () => {
 
     useEffect(() => {
         if (category) {
-            fetchUnits(); // Only fetch units if a category is selected
+            fetchUnits();
         }
     }, [category, municipio]);
 
@@ -145,7 +163,20 @@ const HealthUnitsSearch = () => {
     };
 
     return (
-        <div className="consulta-container" >
+        <div className="consulta-container">
+            {/* Botão de fechar */}
+            {onClose && (
+                <button 
+                    className="close-button"
+                    onClick={onClose}
+                    aria-label="Fechar busca de unidades de saúde"
+                    title="Fechar"
+                    style={{height: '50px', width: '50px', borderRadius: '20%', backgroundColor: 'transparent', border: 'none', cursor: 'pointer', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)'}}
+                >
+                    X
+                </button>
+            )}
+
             <div className="background-container">
                 <img
                     src={require("../../images/home.png")}
