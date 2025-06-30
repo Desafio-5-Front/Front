@@ -141,17 +141,16 @@
 
 /* Mapa */
 .mapa-google {
-    height: 1000rem;
+    height: 500px;
     width: 400px; /* Aumentado para aumentar a largura do mapa */
     padding-top: 50px;
-    padding-left: 100px;
     border-radius: 0.5rem;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-    min-height: 500px;
-    position: fixed;
+    min-height: 450px;
+    
     z-index: 2; /* Certifique-se de que o mapa fique acima de outros elementos */
     top: -200px; /* Ajustado para mover mais para cima */
-    left: 70%; /* Ajustado para mover mais para a direita */
+    left: 40%; /* Ajustado para mover mais para a direita */
     transform: translateY(-50%);
 }
 
@@ -211,7 +210,7 @@
     left: 0;
     width: auto;
     margin-left: 700px;
-    margin-top: 700px;
+    margin-top: 500px;
 }
 
 .painel-controles {
@@ -246,4 +245,28 @@
 
 .icone-controle {
     font-size: 18px;
+}
+@media (max-width: 768px){
+    .container-mapa {
+        margin-left: 10px;
+        margin-top: 1150px;
+    }
+    .mapa-google {
+        width: 130%;
+        min-width: 100px;
+        height: 100px;
+        padding-top: 200px; /* Ajuste o padding conforme necessário */
+        right: 0; /* Posiciona totalmente à esquerda */
+        left: 0; /* Certifica-se de que está alinhado à esquerda */
+        z-index: 9999; /* Garante que fique por cima de tudo */
+    }
+
+    .painel-rotas {
+        display: none;
+        max-height: 300px; /* Ajuste a altura máxima do painel de rotas */
+    }
+
+    .status-localizacao {
+        display: block; /* Exibir o status da localização em telas menores */
+    }
 }

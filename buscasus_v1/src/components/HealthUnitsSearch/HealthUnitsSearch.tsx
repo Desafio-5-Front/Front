@@ -176,7 +176,7 @@ const HealthUnitsSearch = ({ onClose }: HealthUnitSearchProps) => {
                     X
                 </button>
             )}
-
+ 
             <div className="background-container">
                 <img
                     src={require("../../images/home.png")}
