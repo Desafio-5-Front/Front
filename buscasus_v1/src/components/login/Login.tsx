@@ -80,122 +80,46 @@ const Login: React.FC<LoginProps> = ({ onClose, onCadastroClick, onEsqueciSenhaC
 
   return (
     <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '100vh'
-      }}
+      className="login-container"
       onClick={(e) => e.stopPropagation()}
     >
-      <div
-        style={{
-          display: 'flex',
-          width: '1006px',
-          height: '556px',
-          background: 'white',
-          borderRadius: '29px',
-          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-          margin: '191px 201px 210px 224px',
-          gap: '70px',
-          paddingTop: '30px'
-        }}
-      >
+      <div className="login-modal">
         <button
-          style={{
-            position: 'absolute',
-            top: '50px',
-            left: '210px',
-            background: 'none',
-            border: 'none',
-            fontSize: '24px',
-            cursor: 'pointer',
-            color: '#000',
-            padding: '5px'
-          }}
+          className="login-back-button"
           onClick={onClose}
         >
           &larr;
         </button>
 
-        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+        <div className="login-logo-container">
           <img
             src={logoImage}
             alt="BuscaSUS Logo"
-            style={{
-              width: '398px',
-              height: '398px',
-              marginRight: '20px'
-            }}
+            className="login-logo"
           />
         </div>
 
-        <form
-          style={{
-            justifyContent: 'center',
-            display: 'flex',
-            flexDirection: 'column',
-            width: '398px',
-            height: '500px',
-            alignItems: 'center',
-            margin: '10px',
-            gap: '20px',
-            marginTop: '10px',
-            marginLeft: '50px'
-          }}
-        >
-          <h2
-            style={{
-              fontFamily: '"Inter", sans-serif',
-              fontWeight: '800',
-              fontSize: '30px',
-              color: '#000000',
-              paddingTop: '-50px'
-            }}
-          >
-            Login
-          </h2>
+        <form className="login-form">
+          <h2 className="login-title">Login</h2>
 
           <input
             type="email"
             value={state.email}
             onChange={(e) => setState((prev) => ({ ...prev, email: e.target.value }))}
-            style={{
-              width: '327px',
-              height: '50px',
-              border: '1px solid #ccc',
-              borderRadius: '5px',
-              fontFamily: '"Inter", sans-serif',
-              marginTop: '20px',
-              padding: '20px'
-            }}
+            className="login-input"
             placeholder="Email"
           />
 
-          <div style={{ position: 'relative' }}>
+          <div className="password-input-container">
             <input
               type={state.showPassword ? "text" : "password"}
               value={state.senha}
               onChange={(e) => setState((prev) => ({ ...prev, senha: e.target.value }))}
-              style={{
-                width: '327px',
-                height: '50px',
-                border: '1px solid #ccc',
-                borderRadius: '5px',
-                padding: '20px',
-                fontFamily: '"Inter", sans-serif',
-              }}
+              className="login-input"
               placeholder="Senha"
             />
             <span
-              style={{
-                position: 'absolute',
-                transform: 'translateY(-50%)',
-                cursor: 'pointer',
-                paddingRight: '-200px',
-                paddingTop: '50px',
-                left: '290px'
-              }}
+              className="password-toggle"
               onClick={() => setState((prev) => ({ ...prev, showPassword: !prev.showPassword }))}
             >
               {state.showPassword ? "👁️" : "👁️‍🗨️"}
@@ -204,136 +128,55 @@ const Login: React.FC<LoginProps> = ({ onClose, onCadastroClick, onEsqueciSenhaC
 
           <Link
             to="/esqueci-senha"
-            style={{
-              fontFamily: '"Inter", sans-serif',
-              fontWeight: '400',
-              fontSize: '11px',
-              color: '#000000',
-              width: '100%',
-              display: 'flex',
-              justifyContent: 'center',
-              marginTop: '-10px',
-              marginBottom: '10px'
-            }}
+            className="forgot-password-link"
             onClick={(e) => { e.preventDefault(); onEsqueciSenhaClick(); }}
           >
             Esqueceu a senha?
           </Link>
 
-          {state.error && <p style={{ color: 'red' }}>{state.error}</p>}
+          {state.error && <p className="error-message">{state.error}</p>}
 
           <button
             type="button"
-            style={{
-              width: '327px',
-              height: '38px',
-              backgroundColor: '#689CFF',
-              color: '#FFFFFF',
-              fontFamily: '"Inter", sans-serif',
-              fontWeight: '600',
-              fontSize: '18px',
-              border: 'none',
-              borderRadius: '5px',
-              cursor: 'pointer'
-            }}
+            className="login-button"
             onClick={handleLogin}
           >
             Entrar
           </button>
 
-          <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '10px',
-            marginTop: '15px'
-          }}>
+          <div className="social-login-container">
             <button
               type="button"
-              style={{
-                width: '327px',
-                height: '38px',
-                backgroundColor: '#ffffff',
-                color: '#202124',
-                fontFamily: '"Inter", sans-serif',
-                fontWeight: '600',
-                fontSize: '18px',
-                border: 'none',
-                borderRadius: '5px',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '20px'
-              }}
+              className="google-login-button"
               onClick={handleGoogleLogin}
             >
               <img
                 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
                 alt="Google Icon"
-                style={{
-                  width: '30px',
-                  height: '30px',
-                  borderRadius: '30px'
-                }}
+                className="social-icon"
               />
               Entrar com Google
             </button>
 
             <button
               type="button"
-              style={{
-                width: '327px',
-                height: '38px',
-                backgroundColor: '#333',
-                color: 'white',
-                fontFamily: '"Inter", sans-serif',
-                fontWeight: '600',
-                fontSize: '18px',
-                border: 'none',
-                borderRadius: '5px',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '20px'
-              }}
+              className="github-login-button"
               onClick={handleGitHubLogin}
             >
               <img
                 src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
                 alt="GitHub Icon"
-                style={{
-                  width: '30px',
-                  height: '30px',
-                  borderRadius: '30px'
-                }}
+                className="social-icon"
               />
               Entrar com GitHub
             </button>
           </div>
 
-          <p style={{
-            fontFamily: '"Inter", sans-serif',
-            fontWeight: '400',
-            fontSize: '16px',
-            color: '#000000',
-            textAlign: 'center'
-          }}>
+          <p className="register-text">
             Não tem uma conta?
             <button
               type="button"
-              style={{
-                fontWeight: '700',
-                textDecoration: 'underline',
-                color: '#000000',
-                border: 'none',
-                fontSize: '16px',
-                fontFamily: '"Inter", sans-serif',
-                background: 'none',
-                cursor: 'pointer',
-                padding: '0',
-                marginLeft: '5px'
-              }}
+              className="register-link"
               onClick={(e) => { e.stopPropagation(); onCadastroClick(); }}
             >
               Cadastre-se

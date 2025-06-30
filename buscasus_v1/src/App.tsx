@@ -32,6 +32,11 @@ const App: React.FC = () => {
   const [showCadastro, setShowCadastro] = React.useState(false);
   const [showEsqueciSenha, setShowEsqueciSenha] = React.useState(false);
   const [showRedefinirSenha, setShowRedefinirSenha] = React.useState(false);
+  const [menuOpen, setMenuOpen] = React.useState(false);
+  const toggleMenu = () => {
+  setMenuOpen(prev => !prev);
+};
+
   const [isUserLoggedIn, setIsUserLoggedIn] = React.useState(
     localStorage.getItem("isLoggedIn") === "true"
   );
@@ -128,6 +133,7 @@ const App: React.FC = () => {
     setTimeout(() => {
       document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     }, 150);
+    setMenuOpen(false);
   }
 
   // NOVO: Função para lidar com o Logout
@@ -168,7 +174,10 @@ const App: React.FC = () => {
           <div className="logo">
             <img src={iconImage} alt="BuscaSUS Logo" />
           </div>
-          <nav className="nav">
+           <button className="menu-toggle" onClick={toggleMenu}>
+                        ☰
+                    </button>
+          <nav className={`nav ${menuOpen ? "open" : ""}`}>
             {/* Mudança: Botões para navegação e rolagem*/}
             <button className="nav-link" onClick={() => scrollToSection('hero-section')}>Home</button>
             <button className="nav-link" onClick={() => scrollToSection('about-section')}>Sobre</button>
