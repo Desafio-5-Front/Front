@@ -271,6 +271,64 @@ const App: React.FC = () => {
               </div>
             </div>
           </section>
+          <section style={{
+            width: '100%',
+            backgroundColor: '#0066cc', /* Cor de fundo suave */
+            padding: '20px 0',
+            boxSizing: 'border-box'
+          }}>
+            <footer id="contact-footer" style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              maxWidth: '1200px', /* Limita a largura do conteúdo */
+              margin: '0 auto', /* Centraliza o footer na página */
+              padding: '10px 20px'
+            }}>
+              <div className="footer-logos" style={{
+                display: 'flex',
+                gap: '100px', /* Espaçamento entre os logos */
+                marginBottom: '15px'
+              }}>
+                {/* Certifique-se de que as imagens estão na pasta 'src/images/' e use o caminho correto */}
+                <img
+                  src={require("./images/inova.png")}
+                  alt="Logo INOVA"
+                  className="footer-logo"
+                  style={{
+                    height: '50px', /* Altura fixa para os logos */
+                    objectFit: 'contain' /* Garante que o logo não seja cortado */
+                  }}
+                />
+                <img
+                  src={require("./images/icon2.png")}
+                  alt="Logo Governo"
+                  className="footer-logo"
+                  style={{
+                    height: '50px',
+                    objectFit: 'contain'
+                  }}
+                />
+                <img
+                  src={require("./images/secti.png")}
+                  alt="Logo SECTI"
+                  className="footer-logo"
+                  style={{
+                    height: '50px',
+                    objectFit: 'contain'
+                  }}
+                />
+              </div>
+              <div className="footer-contact" style={{
+                fontSize: '1em', /* Tamanho da fonte */
+                color: 'white', /* Cor do texto de contato */
+                fontWeight: 'bold'
+              }}>
+                Contato: buscasusgp2@gmail.com
+              </div>
+            </footer>
+          </section>
         </>) : (
 
           <div className="modal-wrapper">

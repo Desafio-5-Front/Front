@@ -151,7 +151,7 @@
     position: fixed;
     z-index: 2; /* Certifique-se de que o mapa fique acima de outros elementos */
     top: -200px; /* Ajustado para mover mais para cima */
-    left: 30%; /* Ajustado para mover mais para a direita */
+    left: 70%; /* Ajustado para mover mais para a direita */
     transform: translateY(-50%);
 }
 
