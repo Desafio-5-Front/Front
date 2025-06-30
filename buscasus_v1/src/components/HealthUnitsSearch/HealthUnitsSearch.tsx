@@ -32,7 +32,6 @@ const HealthUnitsSearch = ({ onClose }: HealthUnitSearchProps) => {
     } | null>(null);
     const [totalResults, setTotalResults] = useState<number>(0);
 
-    // Adiciona listener para tecla ESC
     useEffect(() => {
         if (!onClose) return;
 
@@ -171,12 +170,11 @@ const HealthUnitsSearch = ({ onClose }: HealthUnitSearchProps) => {
                     onClick={onClose}
                     aria-label="Fechar busca de unidades de saúde"
                     title="Fechar"
-                    style={{height: '50px', width: '50px', borderRadius: '20%', backgroundColor: 'transparent', border: 'none', cursor: 'pointer', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)'}}
                 >
                     X
                 </button>
             )}
- 
+
             <div className="background-container">
                 <img
                     src={require("../../images/home.png")}
@@ -184,52 +182,57 @@ const HealthUnitsSearch = ({ onClose }: HealthUnitSearchProps) => {
                     className="background-image"
                 />
             </div>
-            <div className="form-container">
-                <div className="form-group">
-                    <label htmlFor="category-select" className="form-label">
-                        Selecione a Categoria:
-                    </label>
-                    <select
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)}
-                        className="form-select"
-                    >
-                        <option value="">Selecione uma categoria</option>
-                        <option value="Clínica Geral">Clínica Geral</option>
-                        <option value="Hospital">Hospital</option>
-                        <option value="Farmácia">Farmácia</option>
-                        <option value="Posto de Saúde">Posto de Saúde</option>
-                        <option value="Laboratório">Laboratório</option>
-                    </select>
+
+            <div className="main-content">
+                <div className="form-container">
+                    <div className="form-group">
+                        <label htmlFor="category-select" className="form-label">
+                            Selecione a Categoria:
+                        </label>
+                        <select
+                            value={category}
+                            onChange={(e) => setCategory(e.target.value)}
+                            className="form-select"
+                            id="category-select"
+                        >
+                            <option value="">Selecione uma categoria</option>
+                            <option value="Clínica Geral">Clínica Geral</option>
+                            <option value="Hospital">Hospital</option>
+                            <option value="Farmácia">Farmácia</option>
+                            <option value="Posto de Saúde">Posto de Saúde</option>
+                            <option value="Laboratório">Laboratório</option>
+                        </select>
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="municipio-select" className="form-label">
+                            Selecione o Município:
+                        </label>
+                        <select
+                            id="municipio-select"
+                            value={municipio}
+                            onChange={(e) => setMunicipio(e.target.value)}
+                            className="form-select"
+                        >
+                            <option value="todos">Todos</option>
+                            {municipios.map(m => (
+                                <option key={m} value={m}>{m}</option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="municipio-select" className="form-label">
-                        Selecione o Município:
-                    </label>
-                    <select
-                        id="municipio-select"
-                        value={municipio}
-                        onChange={(e) => setMunicipio(e.target.value)}
-                        className="form-select"
-                    >
-                        <option value="todos">Todos</option>
-                        {municipios.map(m => (
-                            <option key={m} value={m}>{m}</option>
-                        ))}
-                    </select>
+                <div className="results-section">
+                    {renderResults()}
                 </div>
+
+                <GoogleMap
+                    destination={selectedDestination}
+                    onRouteCleared={() => setSelectedDestination(null)}
+                    showMessage={showMessageModal}
+                />
             </div>
 
-            <div className="results-section">
-                {renderResults()}
-            </div>
-
-            <GoogleMap
-                destination={selectedDestination}
-                onRouteCleared={() => setSelectedDestination(null)}
-                showMessage={showMessageModal}
-            />
             <MessageModal
                 message={modalMessage}
                 isOpen={showModal}

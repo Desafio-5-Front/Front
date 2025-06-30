@@ -296,7 +296,7 @@ const App: React.FC = () => {
           </div>
         )}
 
-      <section className="footer-section" >
+      <section className="footer" >
         <footer id="contact-footer" className="footer">
           <div className="footer-logos">
             <img src={require("./images/inova.png")} alt="Logo INOVA" className="footer-logo" />

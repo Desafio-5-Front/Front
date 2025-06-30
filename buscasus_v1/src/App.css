@@ -321,13 +321,6 @@ body {
   transform: translateY(-2px);
 }
 
-.footer {
-  height: 250px;
-  background: #0066cc;
-  padding: 50px 20px;
-  text-align: center;
-}
-
 .footer-logos {
   display: flex;
   justify-content: center;
@@ -350,7 +343,6 @@ body {
 }
 
 
-/* Estiliza o wrapper do modal para criar o efeito de desfoque e posicionamento */
 .modal-wrapper {
   /*position: fixed;  Fixa o modal na tela */
   top: 0;
