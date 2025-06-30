@@ -1,7 +1,7 @@
 .back-button {
   position: absolute;
   top: 10px;
-  left: 10px;
+  left: 1000px;
   background: none;
   border: none;
   font-size: 24px;
@@ -23,9 +23,7 @@
   height: 556px;
   background: white;
   border-radius: 29px;
-  padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: relative;
   margin: 191px 201px 210px 224px;
   gap: 70px;
 }
@@ -64,20 +62,15 @@
   height: 50px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 15px;
   font-family: "Inter", sans-serif;
 }
 
 .password-container {
   position: relative;
-  display: inline-block;
 }
 
 .toggle-password {
   position: absolute;
-  right: 10px;
-  top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
 }
