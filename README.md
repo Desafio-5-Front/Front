@@ -29,14 +29,14 @@ Construir uma landing page funcional, responsiva e moderna, com foco em:
 
 📁 src
 └──buscasus_v1
-    ├──public
-        └──index.html
-    ├──src
-        ├──api # Recursos da API do back-end
-        ├──images  # Imagens, ícones e fontes
-        ├──components # Login, Cadastro, Telas
-        ├──Index.tsx # Ponto de entrada da aplicação
-        └──App.tsx # Componente principal
+└──public
+└──index.html
+└──src
+├──api # Recursos da API do back-end
+├──images  # Imagens, ícones e fontes
+├──components # Login, Cadastro, Telas
+├──Index.tsx # Ponto de entrada da aplicação
+└──App.tsx # Componente principal
     
     
 ---
