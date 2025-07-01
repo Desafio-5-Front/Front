@@ -28,17 +28,17 @@ Construir uma landing page funcional, responsiva e moderna, com foco em:
 ## 🧱 Arquitetura do Projeto
 
 📁 src
-├── assets         # Imagens, ícones e fontes
-├── components     # Componentes reutilizáveis
-├── pages          # Páginas da aplicação
-├── services       # Consumo de APIs externas (Axios)
-├── styles         # Arquivos globais de estilo ou tema
-├── hooks          # Hooks customizados
-├── types          # Tipagens globais e interfaces
-├── utils          # Funções utilitárias
-├── App.tsx        # Componente principal
-└── main.tsx       # Ponto de entrada da aplicação
-
+└──buscasus_v1
+    ├──public
+        └──index.html
+    ├──src
+        ├──api # Recursos da API do back-end
+        ├──images  # Imagens, ícones e fontes
+        ├──components # Login, Cadastro, Telas
+        ├──Index.tsx # Ponto de entrada da aplicação
+        └──App.tsx # Componente principal
+    
+    
 ---
 
 📦 Instalação e Execução
@@ -48,13 +48,13 @@ Clone o repositório e siga os passos:
 git clone https://github.com/Desafio-5-Front/Front.git
 
 # Acesse a pasta do projeto
-cd Front
+cd buscasus_v1
 
 # Instale as dependências
 npm install
 
 # Rode o servidor local
-npm run dev
+npm start
 
 ---
 
@@ -73,22 +73,8 @@ npm run dev
     Deploy pronto para produção
 
 ---
+
 📁 Deploy
 ⚙️  O projeto está publicado no Vercel ou Netlify:
-🔗 [Acesse aqui](url)
+🔗 [Acesse aqui](https://buscasusma-8mp4fznl4-pytwers-projects.vercel.app/)
 
-
-## 👤 Autores (Front-end)
-
-Desenvolvido por **Pytwer Carvalho**  
-🔗 [GitHub](https://github.com/Pytwer) | 🌐 [LinkedIn](https://www.linkedin.com/in/pytwerdev/)
-Desenvolvido por **oi**  
-🔗 [GitHub](https://github.com/) | 🌐 [LinkedIn](https://www.linkedin.com/in/)
-Desenvolvido por **oi**  
-🔗 [GitHub](https://github.com/) | 🌐 [LinkedIn](https://www.linkedin.com/in/)
-Desenvolvido por **oi**  
-🔗 [GitHub](https://github.com/) | 🌐 [LinkedIn](https://www.linkedin.com/in/)
-Desenvolvido por **oi**  
-🔗 [GitHub](https://github.com/) | 🌐 [LinkedIn](https://www.linkedin.com/in/)
-Desenvolvido por **oi**  
-🔗 [GitHub](https://github.com/) | 🌐 [LinkedIn](https://www.linkedin.com/in/)
