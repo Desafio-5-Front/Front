@@ -33,6 +33,64 @@ export default function GoogleMap({ destination, onRouteCleared, showMessage }: 
   const [locationStatus, setLocationStatus] = useState<string>("");
   const [autocomplete, setAutocomplete] = useState<any>(null);
   const [addressConfirmed, setAddressConfirmed] = useState(false);
+  const [mapLoaded, setMapLoaded] = useState(false);
+
+  useEffect(() => {
+    const checkIfMapsLoaded = () => {
+      if (window.google && window.google.maps) {
+        initializeMap();
+        return true;
+      }
+      return false;
+    };
+
+    const initializeMap = () => {
+      if (!mapRef.current) return;
+
+      const directionsServiceInstance = new window.google.maps.DirectionsService();
+      const directionsRendererInstance = new window.google.maps.DirectionsRenderer();
+
+      setDirectionsService(directionsServiceInstance);
+      setDirectionsRenderer(directionsRendererInstance);
+
+      const defaultCenter = { lat: -2.53073, lng: -44.3068 };
+      const mapInstance = new window.google.maps.Map(mapRef.current, {
+        zoom: 13,
+        center: defaultCenter,
+        mapTypeControl: true,
+        streetViewControl: true,
+        fullscreenControl: true,
+      });
+
+      directionsRendererInstance.setMap(mapInstance);
+      setMap(mapInstance);
+      setMapLoaded(true);
+    };
+
+    if (!checkIfMapsLoaded()) {
+      const script = document.createElement("script");
+      script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCEuKHaxqYCj78yw90FXkwsE3a_ITRqfpA&libraries=places,geometry&callback=initMap`;
+      script.async = true;
+      script.defer = true;
+      script.onerror = () => {
+        showMessage("Erro ao carregar o Google Maps. Por favor, recarregue a página.");
+      };
+
+      window.initMap = () => {
+        if (!checkIfMapsLoaded()) {
+          showMessage("O Google Maps não carregou corretamente.");
+        }
+      };
+
+      document.head.appendChild(script);
+    }
+
+    return () => {
+      if (window.google && map) {
+        window.google.maps.event.clearInstanceListeners(map);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const initializeMap = () => {
@@ -194,13 +252,18 @@ export default function GoogleMap({ destination, onRouteCleared, showMessage }: 
   };
 
   return (
+
     <div className="container-mapa">
+      {!mapLoaded && (
+        <div className="map-loading">
+        </div>
+      )}
       <div className="status-localizacao">
         <div className="conteudo-status">
           <p className="texto-status">
           </p>
           {userLocation && (
-            <p className="detalhes-localizacao" style={{display: 'none'}}>
+            <p className="detalhes-localizacao" style={{ display: 'none' }}>
               📍 Coordenadas: {userLocation.lat.toFixed(6)}, {userLocation.lng.toFixed(6)}
             </p>
           )}
@@ -226,7 +289,11 @@ export default function GoogleMap({ destination, onRouteCleared, showMessage }: 
         </div>
       )}
 
-      <div ref={mapRef} className="mapa-google" />
+      <div
+        ref={mapRef}
+        className={`map-view ${mapLoaded ? 'visible' : 'hidden'}`}
+        style={{ height: '500px', width: '100%' }}
+      />
 
       {addressConfirmed && (
         <div className="container-botoes">

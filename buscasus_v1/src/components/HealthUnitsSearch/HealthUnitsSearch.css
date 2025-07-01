@@ -6,15 +6,10 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-html, body {
-  height: 100%;
-}
 
 /* Container Principal */
 .consulta-container {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
+  height: 300px;
   flex-direction: column;
 }
 
@@ -45,29 +40,12 @@ html, body {
   transform: scale(1.05);
 }
 
-/* Background */
-.background-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-}
 
-.background-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  filter: brightness(0.6);
-}
 
 /* Formulário */
 .form-container {
-  position: relative;
-  width: calc(100% - 40px);
   max-width: 1300px;
+  width: 100%;
   margin: 20px auto 0;
   padding: 1.5rem;
   background-color: rgba(255, 255, 255, 0.95);
@@ -76,7 +54,7 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  z-index: 2;
+  z-index: -1;
 }
 
 .form-group {
@@ -120,14 +98,14 @@ html, body {
 
 /* Seção de Resultados */
 .results-section {
-  width: calc(100% - 40px);
-  max-width: 600px;
-  margin: 20px auto;
-  padding: 1.5rem;
-  background-color: rgba(255, 255, 255, 0.95);
+  max-width: 1300px;
+  width: 100%;
+  height: 1000px;
+  margin-top: 50px;
+  padding: 5rem;
+  background-color: rgba(14, 5, 5, 0.95);
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  max-height: 500px;
   overflow-y: auto;
   z-index: 2;
 }
@@ -197,24 +175,25 @@ html, body {
 /* Footer */
 .footer-section {
   width: 100%;
+  top: 60%;
   background-color: #0066cc;
 }
 
 .footer {
   width: 100%;
-  padding: 2rem;
+  height: 200px;
+  margin-top: 30px;
   background-color: #0066cc;
   color: white;
   text-align: center;
 }
 
 .footer-logos {
+  padding-top: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 1.5rem;
-  margin-bottom: 1rem;
 }
 
 .footer-logo {
@@ -281,10 +260,14 @@ html, body {
 /* Responsividade */
 @media (min-width: 768px) {
   .form-container {
-    flex-direction: row;
+    width: 300px;
+    min-width: 400px;
     gap: 2rem;
   }
+  .results-section {
   
+    margin-left: 30px;
+  }
   .form-group {
     flex: 1;
   }
@@ -314,8 +297,8 @@ html, body {
   }
   
   .results-section {
-    width: 90%;
-    max-width: 600px;
+    width: 100%;
+    min-width: 400px;
     margin-left: 30px;
   }
 }

@@ -1,154 +1,164 @@
+/* Estilos base para o container do mapa */
 .container-mapa {
+  position: relative;
+  width: 100%;
   height: auto;
-  width: 100%;
-  align-items: center;
-  
-  justify-content: center;
+  min-height: 300px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
-  position: relative;
-}
-.map-header {
-  position: relative;
-  width: 100%;
-  text-align: right;
-  margin-bottom: 10px;
 }
 
-.close-map-button {
-  background: #ff4444;
-  color: white;
+/* Estilos comuns para ambos os mapas */
+.mapa-google {
   border: none;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s;
+  border-radius: 0.8rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #f5f5f5;
 }
 
-.close-map-button:hover {
-  background: #cc0000;
-}
-
-.container-mapa {
-  position: relative;
-}
-
-.mapa-google {
-  height: 500px;
+/* Versão Desktop do Mapa */
+.mapa-google.desktop {
   width: 100%;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  height: 1000px;
+  max-width: 800px;
+  margin: 0 auto;
 }
-.mapa-google {
+
+/* Versão Mobile do Mapa */
+.mapa-google.mobile {
   width: 100%;
-  max-width: 300px;
-  margin-top: -100px;
-  margin-bottom: 20px;
-  margin-left: 800px;
-  height: 400px;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  height: 350px;
 }
-.modal-endereco obrigatorio {
+
+/* Modal de endereço */
+.modal-endereco.obrigatorio {
+  position: fixed;
   top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   width: 90%;
   max-width: 500px;
   z-index: 1000;
-}
-.modal-endereco {
-  padding-left: 300px;
-  z-index: 1000;
-  display: flex;
-  top: -100px;
-  width: 100%;
-  max-width: 1000px;
-  position: absolute;
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 .conteudo-modal {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 1rem;
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
+.titulo-modal {
+  font-size: 1.25rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.texto-modal {
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.campo-endereco {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.campo-endereco:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.texto-ajuda {
+  font-size: 0.8rem;
+  color: #777;
+  font-style: italic;
+}
+
+/* Container de botões */
 .container-botoes {
-  display: none;
+  display: flex;
   justify-content: center;
   margin-top: 1rem;
 }
 
-/* Media Queries para responsividade */
-@media (max-width: 1200px) {
-  .mapa-google {
-    height: 450px;
-  }
-  
-  .modal-endereco {
-    padding-left: 200px;
-  }
+.botao-limpar {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-@media (max-width: 992px) {
-  .mapa-google {
-    height: 400px;
-    margin-left: 0;
-  }
-  
-  .modal-endereco {
-    padding-left: 100px;
+.botao-limpar:hover {
+  background-color: #3d8b40;
+}
+
+/* Status da localização */
+.status-localizacao {
+  margin-bottom: 0.5rem;
+}
+
+.detalhes-localizacao {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 1024px) {
+  .mapa-google.desktop {
+    height: 450px;
   }
 }
 
 @media (max-width: 768px) {
-  .mapa-google {
-    height: 350px;
-    max-width: 100%;
-    margin-top: 0;
-  }
-  
-  .modal-endereco {
-    padding-left: 0;
-    top: 0;
-  }
-  
-  .conteudo-modal {
-    padding: 1.5rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .mapa-google {
-    height: 300px;
-    border-radius: 0;
-  }
-  
-  .conteudo-modal {
-    padding: 1rem;
-    border-radius: 0;
-  }
-  
   .container-mapa {
-    padding-top: 20px;
+    min-height: 250px;
+  }
+  
+  .mapa-google.mobile {
+    height: 50px;
+  }
+  
+  .modal-endereco.obrigatorio {
+    width: 95%;
+    padding: 1.25rem;
+  }
+  
+  .titulo-modal {
+    font-size: 1.1rem;
   }
 }
 
-@media (max-width: 400px) {
-  .mapa-google {
-    height: 250px;
-  }
-  
-  .campo-endereco {
-    padding: 0.5rem;
-    font-size: 14px;
+@media (max-width: 480px) {
+  .mapa-google.mobile {
+    height: 280px;
+    border-radius: 0.5rem;
   }
   
   .botao-limpar {
-    padding: 0.5rem;
-    font-size: 13px;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+  
+  .modal-endereco.obrigatorio {
+    padding: 1rem;
   }
 }

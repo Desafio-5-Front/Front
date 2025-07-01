@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { fetchHealthUnits, fetchMunicipios } from '../../api';
 import GoogleMap from "../Googlemap";
 import MessageModal from "../MessageModal";
@@ -18,6 +18,20 @@ interface HealthUnitSearchProps {
 }
 
 const HealthUnitsSearch = ({ onClose }: HealthUnitSearchProps) => {
+    const mapDesktopRef = useRef<HTMLDivElement>(null);
+    const mapMobileRef = useRef<HTMLDivElement>(null);
+    const addressInputRef = useRef<HTMLInputElement>(null);
+    const [map, setMap] = useState<any>(null);
+    const [directionsService, setDirectionsService] = useState<any>(null);
+    const [directionsRenderer, setDirectionsRenderer] = useState<any>(null);
+    const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
+    const [userLocationMarker, setUserLocationMarker] = useState<any>(null);
+    const [destinationMarker, setDestinationMarker] = useState<any>(null);
+    const [showDirections, setShowDirections] = useState(false);
+    const [locationStatus, setLocationStatus] = useState<string>("");
+    const [autocomplete, setAutocomplete] = useState<any>(null);
+    const [addressConfirmed, setAddressConfirmed] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
     const [category, setCategory] = useState<string>('');
     const [municipio, setMunicipio] = useState<string>('todos');
     const [municipios, setMunicipios] = useState<string[]>([]);
@@ -32,6 +46,7 @@ const HealthUnitsSearch = ({ onClose }: HealthUnitSearchProps) => {
     } | null>(null);
     const [totalResults, setTotalResults] = useState<number>(0);
 
+    
     useEffect(() => {
         if (!onClose) return;
 
@@ -174,13 +189,7 @@ const HealthUnitsSearch = ({ onClose }: HealthUnitSearchProps) => {
                 </button>
             )}
 
-            <div className="background-container">
-                <img
-                    src={require("../../images/home.png")}
-                    alt="Background"
-                    className="background-image"
-                />
-            </div>
+            
 
             <div className="main-content">
                 <div className="form-container">
@@ -230,6 +239,7 @@ const HealthUnitsSearch = ({ onClose }: HealthUnitSearchProps) => {
                     onRouteCleared={() => setSelectedDestination(null)}
                     showMessage={showMessageModal}
                 />
+                
             </div>
 
             <MessageModal
