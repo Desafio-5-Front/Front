@@ -9,20 +9,16 @@ import Cadastro from "./components/cadastro/Cadastro";
 import EsqueciSenha from "./components/login/EsqueciSenha";
 import RedefinirSenha from "./components/login/RedefinirSenha";
 import HealthUnitsSearch from "./components/HealthUnitsSearch/HealthUnitsSearch";
-
 import Jogar from "./jogar/Jogar"
 import axios from "axios";
-
 interface BaseProps {
   children?: React.ReactNode;
 }
-
 const ProtectedRoute: React.FC<BaseProps> = ({ children }) => {
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
   console.log("ProtectedRoute - isLoggedIn:", isLoggedIn);
   return isLoggedIn ? <>{children}</> : <Navigate to="/" replace />;
 };
-
 const App: React.FC = () => {
   const router = useNavigate();
   const navigate = useNavigate();
@@ -36,18 +32,15 @@ const App: React.FC = () => {
   const toggleMenu = () => {
   setMenuOpen(prev => !prev);
 };
-
   const [isUserLoggedIn, setIsUserLoggedIn] = React.useState(
     localStorage.getItem("isLoggedIn") === "true"
   );
-
   useEffect(() => {
     if (showConsulta) {
       const scrollY = window.scrollY; document.body.style.position = 'fixed'; document.body.style.top = `-${scrollY}px`; document.body.style.width = '100%';
       return () => { const scrollY = document.body.style.top; document.body.style.position = ''; document.body.style.top = ''; window.scrollTo(0, parseInt(scrollY || '0') * -1); };
     }
   }, [showConsulta]);
-
   useEffect(() => {
     console.log("Rota atual:", location.pathname)
     setIsUserLoggedIn(localStorage.getItem("isLoggedIn") === "true");
@@ -63,55 +56,46 @@ const App: React.FC = () => {
     if (location.pathname !== "/redefinir-senha" && showRedefinirSenha) {
       setShowRedefinirSenha(false);
     }
-
     if (location.pathname === "/oauth-success") {
       const params = new URLSearchParams(location.search);
-      const token = params.get("token"); // Extrai o token da URL
-
+      const token = params.get("token"); 
       if (token) {
-        localStorage.setItem("authToken", token); // Armazena o token
-        localStorage.setItem("isLoggedIn", "true"); // Marca como logado
-        setIsUserLoggedIn(true); // Atualiza o estado
+        localStorage.setItem("authToken", token); 
+        localStorage.setItem("isLoggedIn", "true"); 
+        setIsUserLoggedIn(true); 
         console.log("Token OAuth recebido e usuário logado. Redirecionando para /jogar.");
-        navigate("/jogar", { replace: true }); // Redireciona para a página de jogo
+        navigate("/jogar", { replace: true }); 
       } else {
         console.error("Token não encontrado na URL de sucesso OAuth.");
-        // Opcional: Redirecionar para home ou login com erro se o token não for encontrado
         navigate("/", { replace: true });
       }
     }
   }, [location.pathname, showLogin, showRedefinirSenha, navigate]);
-
   const handleLoginClick = () => {
     setShowLogin(true);
     navigate("/login");
   };
-
   const handleJogarClick = () => {
-    if (!isUserLoggedIn) { // Usa o novo estado para verificar
+    if (!isUserLoggedIn) {
       setShowLogin(true);
       navigate("/login");
     } else {
       navigate("/jogar");
     }
   };
-
   const handleCadastroClick = () => {
     setShowLogin(false);
     setShowCadastro(true);
   };
-
   const handleEsqueciSenhaClick = () => {
     setShowLogin(false);
     setShowEsqueciSenha(true);
   };
-
   const handleRedefinirSenhaClick = () => {
     setShowEsqueciSenha(false);
     setShowRedefinirSenha(true);
     navigate("/redefinir-senha");
   };
-
   const handleGoToLogin = () => {
     setShowCadastro(false);
     setShowEsqueciSenha(false);
@@ -119,54 +103,38 @@ const App: React.FC = () => {
     setShowLogin(true);
     navigate("/login");
   };
-
   const handleLoginSuccess = () => {
     setShowLogin(false);
     setIsUserLoggedIn(true);
     navigate("/jogar", { replace: true });
   };
-
-  // Novo:  Esta função agora lida com a navegação E rolagem.
   const scrollToSection = (id: string) => {
-    // Sempre navega para a Home primeiro (/) para garantir que o conteúdo da Home esteja visível
     navigate('/');
     setTimeout(() => {
       document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     }, 150);
     setMenuOpen(false);
   }
-
-  // NOVO: Função para lidar com o Logout
   const handleLogout = async () => {
     try {
-      // Opcional: Avisar o backend que o usuário está fazendo logout
-      // Isso é bom para invalidar sessões ou tokens no lado do servidor.
       await axios.get("https://desafio-05-api.onrender.com/api/auth/logout", {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("authToken")}` // Envia o token se existir
+          Authorization: `Bearer ${localStorage.getItem("authToken")}` 
         }
       });
       console.log("Logout realizado com sucesso no backend.");
     } catch (error) {
       console.error("Erro ao realizar logout no backend (pode ser CORS, token expirado, etc.):", error);
-      // Mesmo com erro no backend, o frontend deve limpar os dados
     } finally {
       localStorage.removeItem("authToken");
       localStorage.removeItem("isLoggedIn");
-      setIsUserLoggedIn(false); // MUDANÇA: Atualiza o estado de login
-      navigate("/"); // Redireciona para a página inicial após o logout
-      alert("Você foi desconectado."); // Feedback visual para o usuário
+      setIsUserLoggedIn(false); 
+      navigate("/"); 
+      alert("Você foi desconectado."); 
     }
   };
-
   const isHomePage = location.pathname === "/";
-  // NOVO: Verifica se NÃO estamos na homepage, para renderizar apenas o conteúdo da rota
   const isNotHomePage = location.pathname !== "/";
-
-
-
-
-
   return (
     <div className="app" style={{ zIndex: 1000 }}>
       <header className="header">
@@ -178,7 +146,6 @@ const App: React.FC = () => {
                         ☰
                     </button>
           <nav className={`nav ${menuOpen ? "open" : ""}`}>
-            {/* Mudança: Botões para navegação e rolagem*/}
             <button className="nav-link" onClick={() => scrollToSection('hero-section')}>Home</button>
             <button className="nav-link" onClick={() => scrollToSection('about-section')}>Sobre</button>
             {!isUserLoggedIn ? (
@@ -280,9 +247,7 @@ const App: React.FC = () => {
               </div>
             </div>
           </section>
-          
         </>) : (
-
           <div className="modal-wrapper">
             <Routes>
               <Route path="/" element={<></>} />
@@ -295,7 +260,6 @@ const App: React.FC = () => {
             </Routes>
           </div>
         )}
-
       <section className="footer" >
         <footer id="contact-footer" className="footer">
           <div className="footer-logos">
@@ -306,7 +270,6 @@ const App: React.FC = () => {
           <div className="footer-contact">Contato: buscasusgp2@gmail.com</div>
         </footer>
       </section>
-
       {showLogin && (
         <div className="modal-overlay" onClick={(e) => {
           if (e.target === e.currentTarget) {
@@ -327,8 +290,8 @@ const App: React.FC = () => {
         <div className="modal-overlay" onClick={(e) => { if (e.target === e.currentTarget) setShowCadastro(false); }}>
           <Cadastro
             onClose={() => setShowCadastro(false)}
-            onLoginClick={handleGoToLogin} // Mantido se ainda houver o "Tem uma conta? Entrar"
-            onLoginSuccess={handleLoginSuccess} // NOVO: Para o caso de cadastro bem-sucedido
+            onLoginClick={handleGoToLogin} 
+            onLoginSuccess={handleLoginSuccess} 
           />
         </div>
       )}
@@ -341,7 +304,6 @@ const App: React.FC = () => {
         <div className="modal-overlay" onClick={(e) => {
           if (e.target === e.currentTarget) {
             setShowRedefinirSenha(false);
-            // Ao fechar o modal, se a rota for /redefinir-senha, navega para a home
             if (location.pathname === "/redefinir-senha") {
               navigate("/");
             }

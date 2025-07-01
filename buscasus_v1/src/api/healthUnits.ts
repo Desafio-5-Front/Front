@@ -1,13 +1,8 @@
-// src/api/healthUnits.ts
 import { API_BASE_URL } from './config';
-
-// Defina o timeout como constante local
 const REQUEST_TIMEOUT = 5000;
-
 const fetchWithTimeout = async (url: string) => {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT);
-  
   try {
     const response = await fetch(url, { signal: controller.signal });
     clearTimeout(timeout);
@@ -17,7 +12,6 @@ const fetchWithTimeout = async (url: string) => {
     throw error;
   }
 };
-
 export const fetchHealthUnits = async (category: string, municipio: string) => {
   try {
     const url = `${API_BASE_URL}/health-units?category=${encodeURIComponent(category)}&municipio=${encodeURIComponent(municipio)}`;

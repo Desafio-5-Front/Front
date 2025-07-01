@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Login.css";
 import logoImage from "../../images/icon.png";
-import axios from "axios"; // Importa o Axios
-
+import axios from "axios"; 
 interface RedefinirSenhaState {
   senha: string;
   confirmSenha: string;
@@ -12,12 +11,10 @@ interface RedefinirSenhaState {
   showPassword: boolean;
   showConfirmPassword: boolean;
 }
-
 interface RedefinirSenhaProps {
   onClose: () => void;
   onLoginClick: () => void;
 }
-
 const RedefinirSenha: React.FC<RedefinirSenhaProps> = ({ onClose, onLoginClick }) => {
   const [state, setState] = useState<RedefinirSenhaState>({
     senha: "",
@@ -27,12 +24,9 @@ const RedefinirSenha: React.FC<RedefinirSenhaProps> = ({ onClose, onLoginClick }
     showPassword: false,
     showConfirmPassword: false,
   });
-
   const navigate = useNavigate();
   const location = useLocation();
-
   const [token, setToken] = useState<string | null>(null);
-
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const urlToken = params.get("token");
@@ -42,10 +36,8 @@ const RedefinirSenha: React.FC<RedefinirSenhaProps> = ({ onClose, onLoginClick }
       setState((prev) => ({ ...prev, error: "Token de redefinição de senha não encontrado na URL. Por favor, use o link do e-mail." }));
     }
   }, [location.search, navigate]);
-
   const handleSubmit = async () => {
     setState((prev) => ({ ...prev, error: "", success: "" }));
-
     if (!state.senha || !state.confirmSenha) {
       setState((prev) => ({ ...prev, error: "Ambos os campos são obrigatórios." }));
       return;
@@ -58,28 +50,22 @@ const RedefinirSenha: React.FC<RedefinirSenhaProps> = ({ onClose, onLoginClick }
       setState((prev) => ({ ...prev, error: "Token de redefinição inválido ou ausente." }));
       return;
     }
-
     try {
-      // Linhas de depuração (manter para ver o payload)
       const requestBody = {
         token: token,
-        newPassword: state.senha, // <-- MUDANÇA AQUI: Corrigido de 'password' para 'newPassword'
+        newPassword: state.senha, 
       };
       console.log("Token a ser enviado:", token);
       console.log("Senha a ser enviada:", state.senha);
       console.log("Objeto de requisição:", requestBody);
-
       const response = await axios.post("https://desafio-05-api.onrender.com/api/auth/reset-password", requestBody);
-
       setState((prev) => ({ ...prev, success: response.data.message || "Senha redefinida com sucesso!" }));
       setTimeout(() => {
         onClose();
         onLoginClick();
       }, 2000);
-
     } catch (error: unknown) {
       console.error("Erro ao redefinir senha:", error);
-
       if (axios.isAxiosError(error)) {
         if (error.response) {
           const axiosResponseData = error.response.data;
@@ -97,7 +83,6 @@ const RedefinirSenha: React.FC<RedefinirSenhaProps> = ({ onClose, onLoginClick }
       }
     }
   };
-
   return (
     <div className="login-container" onClick={(e) => e.stopPropagation()}>
       <div className="login-box">
@@ -111,19 +96,16 @@ const RedefinirSenha: React.FC<RedefinirSenhaProps> = ({ onClose, onLoginClick }
           <h2 className="login-header">Redefinir Senha</h2>
           {state.error && <p className="error">{state.error}</p>}
           {state.success && <p style={{ color: "green" }}>{state.success}</p>}
-
           <div className="password-container">
             <input
               type={state.showPassword ? "text" : "password"}
               value={state.senha}
               onChange={(e) => setState((prev) => ({ ...prev, senha: e.target.value }))}
               className="login-input"
-              placeholder="Nova Senha"
-            />
+              placeholder="Nova Senha"/>
             <span
               className="toggle-password"
-              onClick={() => setState((prev) => ({ ...prev, showPassword: !prev.showPassword }))}
-            >
+              onClick={() => setState((prev) => ({ ...prev, showPassword: !prev.showPassword }))}>
               {state.showPassword ? "👁️" : "👁️‍🗨️"}
             </span>
           </div>
@@ -133,12 +115,10 @@ const RedefinirSenha: React.FC<RedefinirSenhaProps> = ({ onClose, onLoginClick }
               value={state.confirmSenha}
               onChange={(e) => setState((prev) => ({ ...prev, confirmSenha: e.target.value }))}
               className="login-input"
-              placeholder="Confirmar Nova Senha"
-            />
+              placeholder="Confirmar Nova Senha"/>
             <span
               className="toggle-password"
-              onClick={() => setState((prev) => ({ ...prev, showConfirmPassword: !prev.showConfirmPassword }))}
-            >
+              onClick={() => setState((prev) => ({ ...prev, showConfirmPassword: !prev.showConfirmPassword }))}>
               {state.showConfirmPassword ? "👁️" : "👁️‍🗨️"}
             </span>
           </div>
@@ -153,5 +133,4 @@ const RedefinirSenha: React.FC<RedefinirSenhaProps> = ({ onClose, onLoginClick }
     </div>
   );
 };
-
 export default RedefinirSenha;

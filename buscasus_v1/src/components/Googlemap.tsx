@@ -1,8 +1,6 @@
 "use client";
-
 import { useEffect, useRef, useState } from "react";
 import "./Googlemap.css";
-
 interface GoogleMapProps {
   destination: {
     place_id: string;
@@ -12,14 +10,12 @@ interface GoogleMapProps {
   onRouteCleared: () => void;
   showMessage: (message: string) => void;
 }
-
 declare global {
   interface Window {
     google: any;
     initMap: () => void;
   }
 }
-
 export default function GoogleMap({ destination, onRouteCleared, showMessage }: GoogleMapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
   const addressInputRef = useRef<HTMLInputElement>(null);
@@ -34,7 +30,6 @@ export default function GoogleMap({ destination, onRouteCleared, showMessage }: 
   const [autocomplete, setAutocomplete] = useState<any>(null);
   const [addressConfirmed, setAddressConfirmed] = useState(false);
   const [mapLoaded, setMapLoaded] = useState(false);
-
   useEffect(() => {
     const checkIfMapsLoaded = () => {
       if (window.google && window.google.maps) {
@@ -43,16 +38,12 @@ export default function GoogleMap({ destination, onRouteCleared, showMessage }: 
       }
       return false;
     };
-
     const initializeMap = () => {
       if (!mapRef.current) return;
-
       const directionsServiceInstance = new window.google.maps.DirectionsService();
       const directionsRendererInstance = new window.google.maps.DirectionsRenderer();
-
       setDirectionsService(directionsServiceInstance);
       setDirectionsRenderer(directionsRendererInstance);
-
       const defaultCenter = { lat: -2.53073, lng: -44.3068 };
       const mapInstance = new window.google.maps.Map(mapRef.current, {
         zoom: 13,
@@ -61,12 +52,10 @@ export default function GoogleMap({ destination, onRouteCleared, showMessage }: 
         streetViewControl: true,
         fullscreenControl: true,
       });
-
       directionsRendererInstance.setMap(mapInstance);
       setMap(mapInstance);
       setMapLoaded(true);
     };
-
     if (!checkIfMapsLoaded()) {
       const script = document.createElement("script");
       script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCEuKHaxqYCj78yw90FXkwsE3a_ITRqfpA&libraries=places,geometry&callback=initMap`;
@@ -75,33 +64,26 @@ export default function GoogleMap({ destination, onRouteCleared, showMessage }: 
       script.onerror = () => {
         showMessage("Erro ao carregar o Google Maps. Por favor, recarregue a página.");
       };
-
       window.initMap = () => {
         if (!checkIfMapsLoaded()) {
           showMessage("O Google Maps não carregou corretamente.");
         }
       };
-
       document.head.appendChild(script);
     }
-
     return () => {
       if (window.google && map) {
         window.google.maps.event.clearInstanceListeners(map);
       }
     };
   }, []);
-
   useEffect(() => {
     const initializeMap = () => {
       if (!window.google || !mapRef.current) return;
-
       const directionsServiceInstance = new window.google.maps.DirectionsService();
       const directionsRendererInstance = new window.google.maps.DirectionsRenderer();
-
       setDirectionsService(directionsServiceInstance);
       setDirectionsRenderer(directionsRendererInstance);
-
       const defaultCenter = { lat: -2.53073, lng: -44.3068 };
       const mapInstance = new window.google.maps.Map(mapRef.current, {
         zoom: 13,
@@ -109,23 +91,19 @@ export default function GoogleMap({ destination, onRouteCleared, showMessage }: 
         mapTypeControl: true,
         streetViewControl: true,
       });
-
       directionsRendererInstance.setMap(mapInstance);
       setMap(mapInstance);
     };
-
     if (!window.google) {
       const script = document.createElement("script");
       script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCEuKHaxqYCj78yw90FXkwsE3a_ITRqfpA&libraries=places,geometry&callback=initMap`;
       script.async = true;
       script.defer = true;
-
       window.initMap = initializeMap;
       document.head.appendChild(script);
     } else {
       initializeMap();
     }
-
     return () => {
       if (window.google && map) {
         window.google.maps.event.clearInstanceListeners(map);
@@ -138,7 +116,6 @@ export default function GoogleMap({ destination, onRouteCleared, showMessage }: 
       }
     };
   }, []);
-
   useEffect(() => {
     if (window.google && addressInputRef.current && !autocomplete) {
       const autocompleteInstance = new window.google.maps.places.Autocomplete(addressInputRef.current, {
@@ -146,7 +123,6 @@ export default function GoogleMap({ destination, onRouteCleared, showMessage }: 
         componentRestrictions: { country: "BR" },
         fields: ["place_id", "geometry", "name", "formatted_address"],
       });
-
       autocompleteInstance.addListener("place_changed", () => {
         const place = autocompleteInstance.getPlace();
         if (place.geometry && place.geometry.location) {
@@ -154,18 +130,14 @@ export default function GoogleMap({ destination, onRouteCleared, showMessage }: 
             lat: place.geometry.location.lat(),
             lng: place.geometry.location.lng(),
           };
-
           setUserLocation(newLocation);
           setAddressConfirmed(true);
-
           if (map) {
             map.setCenter(newLocation);
             map.setZoom(16);
-
             if (userLocationMarker) {
               userLocationMarker.setMap(null);
             }
-
             const marker = new window.google.maps.Marker({
               position: newLocation,
               map: map,
@@ -175,46 +147,37 @@ export default function GoogleMap({ destination, onRouteCleared, showMessage }: 
                 scaledSize: new window.google.maps.Size(40, 40),
               },
             });
-
             setUserLocationMarker(marker);
           }
-
           setLocationStatus("");
         }
       });
-
       setAutocomplete(autocompleteInstance);
     }
   }, [map]);
-
   useEffect(() => {
     if (destination && directionsService && directionsRenderer && map && userLocation && addressConfirmed) {
       calculateAndDisplayRoute();
     }
   }, [destination, directionsService, directionsRenderer, map, userLocation, addressConfirmed]);
-
   const calculateAndDisplayRoute = () => {
     if (!userLocation || !destination?.place_id || !directionsService || !directionsRenderer) {
       showMessage("❌ Por favor, primeiro digite seu endereço válido");
       return;
     }
-
     if (destinationMarker) {
       destinationMarker.setMap(null);
     }
-
     const request = {
       origin: userLocation,
       destination: { placeId: destination.place_id },
       travelMode: window.google.maps.TravelMode.DRIVING,
     };
-
     directionsService
       .route(request)
       .then((response: any) => {
         directionsRenderer.setDirections(response);
         setShowDirections(true);
-
         const marker = new window.google.maps.Marker({
           position: response.routes[0].legs[0].end_location,
           map,
@@ -231,7 +194,6 @@ export default function GoogleMap({ destination, onRouteCleared, showMessage }: 
         showMessage("❌ Erro ao calcular rota. Verifique seu endereço e tente novamente.");
       });
   };
-
   const clearRoute = () => {
     if (directionsRenderer) {
       directionsRenderer.set("directions", null);
@@ -242,7 +204,6 @@ export default function GoogleMap({ destination, onRouteCleared, showMessage }: 
     }
     setShowDirections(false);
     onRouteCleared();
-
     if (map && userLocation) {
       map.setCenter(userLocation);
       map.setZoom(16);
@@ -250,9 +211,7 @@ export default function GoogleMap({ destination, onRouteCleared, showMessage }: 
     setAddressConfirmed(false);
     setLocationStatus("");
   };
-
   return (
-
     <div className="container-mapa">
       {!mapLoaded && (
         <div className="map-loading">
@@ -269,7 +228,6 @@ export default function GoogleMap({ destination, onRouteCleared, showMessage }: 
           )}
         </div>
       </div>
-
       {!addressConfirmed && (
         <div className="modal-endereco obrigatorio">
           <div className="conteudo-modal">
@@ -282,25 +240,20 @@ export default function GoogleMap({ destination, onRouteCleared, showMessage }: 
               type="text"
               placeholder="Ex: Rua Exemplo, 123, Bairro, Cidade"
               className="campo-endereco"
-              required
-            />
+              required/>
             <p className="texto-ajuda">Digite até ver sugestões de endereços e selecione o correto</p>
           </div>
         </div>
       )}
-
       <div
         ref={mapRef}
         className={`map-view ${mapLoaded ? 'visible' : 'hidden'}`}
-        style={{ height: '500px', width: '100%' }}
-      />
-
+        style={{ height: '500px', width: '100%' }}/>
       {addressConfirmed && (
         <div className="container-botoes">
           <button
             onClick={clearRoute}
-            className="botao-limpar"
-          >
+            className="botao-limpar">
             🔄 Nova Busca no Mapa
           </button>
         </div>
