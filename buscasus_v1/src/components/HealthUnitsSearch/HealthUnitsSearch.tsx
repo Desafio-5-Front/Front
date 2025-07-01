@@ -57,8 +57,7 @@ const HealthUnitsSearch = ({ onClose }: HealthUnitSearchProps) => {
             const municipiosData = await fetchMunicipios();
             setMunicipios(municipiosData.sort());
         } catch (e) {
-            console.error("Erro ao carregar municípios:", e);
-            showMessageModal("Erro ao carregar lista de municípios.");
+            showMessageModal("");
         }
     };
 

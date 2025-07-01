@@ -30,7 +30,7 @@ export default function GoogleMap({ destination, onRouteCleared, showMessage }: 
   const [userLocationMarker, setUserLocationMarker] = useState<any>(null);
   const [destinationMarker, setDestinationMarker] = useState<any>(null);
   const [showDirections, setShowDirections] = useState(false);
-  const [locationStatus, setLocationStatus] = useState<string>("Por favor, digite seu endereço");
+  const [locationStatus, setLocationStatus] = useState<string>("");
   const [autocomplete, setAutocomplete] = useState<any>(null);
   const [addressConfirmed, setAddressConfirmed] = useState(false);
 
@@ -121,7 +121,7 @@ export default function GoogleMap({ destination, onRouteCleared, showMessage }: 
             setUserLocationMarker(marker);
           }
 
-          setLocationStatus("Endereço confirmado");
+          setLocationStatus("");
         }
       });
 
@@ -190,7 +190,7 @@ export default function GoogleMap({ destination, onRouteCleared, showMessage }: 
       map.setZoom(16);
     }
     setAddressConfirmed(false);
-    setLocationStatus("Por favor, digite seu endereço novamente");
+    setLocationStatus("");
   };
 
   return (
@@ -198,7 +198,6 @@ export default function GoogleMap({ destination, onRouteCleared, showMessage }: 
       <div className="status-localizacao">
         <div className="conteudo-status">
           <p className="texto-status">
-            <span className="rotulo-status">Status:</span> {locationStatus}
           </p>
           {userLocation && (
             <p className="detalhes-localizacao" style={{display: 'none'}}>
