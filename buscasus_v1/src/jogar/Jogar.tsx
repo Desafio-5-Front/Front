@@ -1,25 +1,29 @@
 import React from "react";
-import "../App.css"; // Importa o arquivo CSS global
+// A importação do arquivo CSS foi removida para resolver o erro de compilação,
+// já que os estilos deste componente são todos aplicados via 'style' inline.
 
 const Jogar: React.FC = () => {
-  console.log("Renderizando página Jogar");
+  console.log("Renderizando página Jogar com a URL correta do iframe.");
+
   return (
     <div style={{
-      padding: "0", // Ajuste o padding para 0 para o iframe ocupar o espaço
-      margin: "0",  // Remova margens
+      padding: "0",
+      margin: "0",
       textAlign: "center",
-      width: "100vw", // 100% da largura da viewport
-      height: "100vh", // 100% da altura da viewport
-      boxSizing: "border-box", // Garante que padding não adicione largura/altura extra
+      width: "100vw",
+      height: "100vh",
+      boxSizing: "border-box",
       backgroundColor: "#D3FCEA",
-      display: "flex", // Para centralizar o iframe se for menor
-      flexDirection: "column", // Para centralizar verticalmente
-      justifyContent: "center", // Centraliza verticalmente
-      alignItems: "center", // Centraliza horizontalmente
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
     }}>
-      {/* <-- MUDANÇA AQUI: Adiciona o iframe para o jogo */}
+      {/* A única mudança necessária é na propriedade 'src' do iframe.
+        A URL antiga foi substituída pela URL correta e funcional do jogo.
+      */}
       <iframe
-        src="https://saude-em-acao-pre-alpha.vercel.app/"
+        src="https://saude-em-acao-ten.vercel.app/" // <-- MUDANÇA PRINCIPAL AQUI
         title="Saúde em Ação - O Jogo" // Título para acessibilidade
         style={{
           width: "100%",        // Ocupa 100% da largura do contêiner pai
@@ -29,9 +33,7 @@ const Jogar: React.FC = () => {
           backgroundColor: "#D3FCEA" // Cor de fundo do iframe, caso haja carregamento
         }}
         allowFullScreen // Permite modo tela cheia
-        // sandbox="allow-scripts allow-same-origin" // Opcional, para mais controle de segurança
       ></iframe>
-      {/* <-- FIM DA MUDANÇA AQUI */}
     </div>
   );
 };
