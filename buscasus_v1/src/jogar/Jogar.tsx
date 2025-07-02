@@ -1,39 +1,31 @@
-import React from "react";
-// A importação do arquivo CSS foi removida para resolver o erro de compilação,
-// já que os estilos deste componente são todos aplicados via 'style' inline.
+import React, { useEffect } from 'react';
 
+// Este componente tem uma única responsabilidade: redirecionar o usuário para a URL do jogo.
 const Jogar: React.FC = () => {
-  console.log("Renderizando página Jogar com a URL correta do iframe.");
+  
+  console.log("Componente Jogar: Iniciando redirecionamento para a URL correta do jogo.");
 
+  // O hook useEffect é usado para executar uma ação assim que o componente é carregado.
+  useEffect(() => {
+    // A linha abaixo muda a URL na barra de endereço do navegador,
+    // enviando o usuário para o site do jogo.
+    window.location.href = 'https://saude-em-acao-ten.vercel.app/';
+  }, []); // O array vazio [] garante que este efeito rode apenas uma vez.
+
+  // É uma boa prática exibir uma mensagem de fallback para o usuário
+  // enquanto o navegador processa o redirecionamento.
   return (
     <div style={{
-      padding: "0",
-      margin: "0",
-      textAlign: "center",
-      width: "100vw",
-      height: "100vh",
-      boxSizing: "border-box",
-      backgroundColor: "#D3FCEA",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      alignItems: "center",
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '100vh',
+      width: '100vw',
+      backgroundColor: '#D3FCEA',
+      fontFamily: 'sans-serif',
+      color: '#333'
     }}>
-      {/* A única mudança necessária é na propriedade 'src' do iframe.
-        A URL antiga foi substituída pela URL correta e funcional do jogo.
-      */}
-      <iframe
-        src="https://saude-em-acao-ten.vercel.app/" // <-- MUDANÇA PRINCIPAL AQUI
-        title="Saúde em Ação - O Jogo" // Título para acessibilidade
-        style={{
-          width: "100%",        // Ocupa 100% da largura do contêiner pai
-          height: "100%",       // Ocupa 100% da altura do contêiner pai
-          border: "none",       // Remove a borda padrão do iframe
-          display: "block",     // Remove espaço extra abaixo do iframe
-          backgroundColor: "#D3FCEA" // Cor de fundo do iframe, caso haja carregamento
-        }}
-        allowFullScreen // Permite modo tela cheia
-      ></iframe>
+      <h1>Redirecionando para o jogo...</h1>
     </div>
   );
 };
