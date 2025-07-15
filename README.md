@@ -47,9 +47,6 @@ Clone o repositório e siga os passos:
 # Clone o repositório
 git clone https://github.com/Desafio-5-Front/Front.git
 
-# Acesse a pasta do projeto
-cd buscasus_v1
-
 # Instale as dependências
 npm install
 
