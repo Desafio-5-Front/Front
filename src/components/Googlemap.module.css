@@ -1,148 +1,141 @@
-@@ .. @@
--.container-mapa {
-+.containerMapa {
-   width: 100%;
-   position: relative;
-   background: #f8f9fa;
-@@ .. @@
--.status-localizacao {
-+.statusLocalizacao {
-   padding: 1rem;
-   background: #e3f2fd;
-   border-bottom: 1px solid #ddd;
- }
- 
--.conteudo-status {
-+.conteudoStatus {
-   max-width: 800px;
-   margin: 0 auto;
- }
- 
--.texto-status {
-+.textoStatus {
-   margin: 0;
-   color: #0066cc;
-   font-weight: 500;
- }
- 
--.detalhes-localizacao {
-+.detalhesLocalizacao {
-   margin: 0.5rem 0 0 0;
-   font-size: 0.9rem;
-   color: #666;
- }
- 
--.modal-endereco {
-+.modalEndereco {
-   position: absolute;
-   top: 0;
-   left: 0;
-@@ .. @@
-   z-index: 10;
- }
- 
--.modal-endereco.obrigatorio {
-+.obrigatorio {
-   background: rgba(255, 255, 255, 0.98);
- }
- 
--.conteudo-modal {
-+.conteudoModal {
-   background: white;
-   padding: 2rem;
-   border-radius: 12px;
-@@ .. @@
-   text-align: center;
- }
- 
--.titulo-modal {
-+.tituloModal {
-   color: #0066cc;
-   margin-bottom: 1rem;
-   font-size: 1.5rem;
- }
- 
--.texto-modal {
-+.textoModal {
-   color: #666;
-   margin-bottom: 1.5rem;
-   line-height: 1.6;
- }
- 
--.campo-endereco {
-+.campoEndereco {
-   width: 100%;
-   padding: 12px 16px;
-   border: 2px solid #ddd;
-@@ .. @@
-   transition: border-color 0.3s ease;
- }
- 
--.campo-endereco:focus {
-+.campoEndereco:focus {
-   outline: none;
-   border-color: #0066cc;
- }
- 
--.texto-ajuda {
-+.textoAjuda {
-   font-size: 0.9rem;
-   color: #888;
-   margin: 0;
- }
- 
--.map-view {
-+.mapView {
-   transition: opacity 0.3s ease;
- }
- 
--.map-view.visible {
-+.visible {
-   opacity: 1;
- }
- 
--.map-view.hidden {
-+.hidden {
-   opacity: 0;
- }
- 
--.container-botoes {
-+.containerBotoes {
-   padding: 1rem;
-   text-align: center;
-   background: #f8f9fa;
-   border-top: 1px solid #ddd;
- }
- 
--.botao-limpar {
-+.botaoLimpar {
-   background: #0066cc;
-   color: white;
-   border: none;
-@@ .. @@
-   transition: all 0.3s ease;
- }
- 
--.botao-limpar:hover {
-+.botaoLimpar:hover {
-   background: #004d99;
-   transform: translateY(-2px);
- }
- 
- @media (max-width: 768px) {
--  .conteudo-modal {
-+  .conteudoModal {
-     padding: 1.5rem;
-     margin: 1rem;
-   }
-   
--  .titulo-modal {
-+  .tituloModal {
-     font-size: 1.3rem;
-   }
-   
--  .campo-endereco {
-+  .campoEndereco {
-     font-size: 16px; /* Prevents zoom on iOS */
-   }
- }
+.containerMapa {
+  width: 100%;
+  position: relative;
+  background: #f8f9fa;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.statusLocalizacao {
+  padding: 1rem;
+  background: #e3f2fd;
+  border-bottom: 1px solid #ddd;
+}
+
+.conteudoStatus {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.textoStatus {
+  margin: 0;
+  color: #0066cc;
+  font-weight: 500;
+}
+
+.detalhesLocalizacao {
+  margin: 0.5rem 0 0 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.modalEndereco {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.obrigatorio {
+  background: rgba(255, 255, 255, 0.98);
+}
+
+.conteudoModal {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.tituloModal {
+  color: #0066cc;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.textoModal {
+  color: #666;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.campoEndereco {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.campoEndereco:focus {
+  outline: none;
+  border-color: #0066cc;
+}
+
+.textoAjuda {
+  font-size: 0.9rem;
+  color: #888;
+  margin: 0;
+}
+
+.mapView {
+  transition: opacity 0.3s ease;
+}
+
+.visible {
+  opacity: 1;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.containerBotoes {
+  padding: 1rem;
+  text-align: center;
+  background: #f8f9fa;
+  border-top: 1px solid #ddd;
+}
+
+.botaoLimpar {
+  background: #0066cc;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.botaoLimpar:hover {
+  background: #004d99;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .conteudoModal {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+  
+  .tituloModal {
+    font-size: 1.3rem;
+  }
+  
+  .campoEndereco {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}
