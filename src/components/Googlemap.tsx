@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import "./Googlemap.css";
+import styles from "./Googlemap.module.css";
 
 interface GoogleMapProps {
   destination: {
@@ -199,18 +199,18 @@ export default function GoogleMap({ destination, onRouteCleared, showMessage }: 
   };
 
   return (
-    <div className="container-mapa">
+    <div className={styles.containerMapa}>
       {!mapLoaded && (
-        <div className="map-loading">
+        <div className={styles.mapLoading}>
         </div>
       )}
 
-      <div className="status-localizacao">
-        <div className="conteudo-status">
-          <p className="texto-status">
+      <div className={styles.statusLocalizacao}>
+        <div className={styles.conteudoStatus}>
+          <p className={styles.textoStatus}>
           </p>
           {userLocation && (
-            <p className="detalhes-localizacao" style={{ display: 'none' }}>
+            <p className={styles.detalhesLocalizacao} style={{ display: 'none' }}>
               📍 Coordenadas: {userLocation.lat.toFixed(6)}, {userLocation.lng.toFixed(6)}
             </p>
           )}
@@ -218,33 +218,33 @@ export default function GoogleMap({ destination, onRouteCleared, showMessage }: 
       </div>
 
       {!addressConfirmed && (
-        <div className="modal-endereco obrigatorio">
-          <div className="conteudo-modal">
-            <h3 className="titulo-modal">📍 Digite seu Endereço Completo</h3>
-            <p className="texto-modal">
+        <div className={`${styles.modalEndereco} ${styles.obrigatorio}`}>
+          <div className={styles.conteudoModal}>
+            <h3 className={styles.tituloModal}>📍 Digite seu Endereço Completo</h3>
+            <p className={styles.textoModal}>
               Por favor, digite seu endereço completo para continuar:
             </p>
             <input
               ref={addressInputRef}
               type="text"
               placeholder="Ex: Rua Exemplo, 123, Bairro, Cidade"
-              className="campo-endereco"
+              className={styles.campoEndereco}
               required/>
-            <p className="texto-ajuda">Digite até ver sugestões de endereços e selecione o correto</p>
+            <p className={styles.textoAjuda}>Digite até ver sugestões de endereços e selecione o correto</p>
           </div>
         </div>
       )}
 
       <div
         ref={mapRef}
-        className={`map-view ${mapLoaded ? 'visible' : 'hidden'}`}
+        className={`${styles.mapView} ${mapLoaded ? styles.visible : styles.hidden}`}
         style={{ height: '500px', width: '100%' }}/>
 
       {addressConfirmed && (
-        <div className="container-botoes">
+        <div className={styles.containerBotoes}>
           <button
             onClick={clearRoute}
-            className="botao-limpar">
+            className={styles.botaoLimpar}>
             🔄 Nova Busca no Mapa
           </button>
         </div>
