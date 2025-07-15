@@ -1,0 +1,148 @@
+@@ .. @@
+-.container-mapa {
++.containerMapa {
+   width: 100%;
+   position: relative;
+   background: #f8f9fa;
+@@ .. @@
+-.status-localizacao {
++.statusLocalizacao {
+   padding: 1rem;
+   background: #e3f2fd;
+   border-bottom: 1px solid #ddd;
+ }
+ 
+-.conteudo-status {
++.conteudoStatus {
+   max-width: 800px;
+   margin: 0 auto;
+ }
+ 
+-.texto-status {
++.textoStatus {
+   margin: 0;
+   color: #0066cc;
+   font-weight: 500;
+ }
+ 
+-.detalhes-localizacao {
++.detalhesLocalizacao {
+   margin: 0.5rem 0 0 0;
+   font-size: 0.9rem;
+   color: #666;
+ }
+ 
+-.modal-endereco {
++.modalEndereco {
+   position: absolute;
+   top: 0;
+   left: 0;
+@@ .. @@
+   z-index: 10;
+ }
+ 
+-.modal-endereco.obrigatorio {
++.obrigatorio {
+   background: rgba(255, 255, 255, 0.98);
+ }
+ 
+-.conteudo-modal {
++.conteudoModal {
+   background: white;
+   padding: 2rem;
+   border-radius: 12px;
+@@ .. @@
+   text-align: center;
+ }
+ 
+-.titulo-modal {
++.tituloModal {
+   color: #0066cc;
+   margin-bottom: 1rem;
+   font-size: 1.5rem;
+ }
+ 
+-.texto-modal {
++.textoModal {
+   color: #666;
+   margin-bottom: 1.5rem;
+   line-height: 1.6;
+ }
+ 
+-.campo-endereco {
++.campoEndereco {
+   width: 100%;
+   padding: 12px 16px;
+   border: 2px solid #ddd;
+@@ .. @@
+   transition: border-color 0.3s ease;
+ }
+ 
+-.campo-endereco:focus {
++.campoEndereco:focus {
+   outline: none;
+   border-color: #0066cc;
+ }
+ 
+-.texto-ajuda {
++.textoAjuda {
+   font-size: 0.9rem;
+   color: #888;
+   margin: 0;
+ }
+ 
+-.map-view {
++.mapView {
+   transition: opacity 0.3s ease;
+ }
+ 
+-.map-view.visible {
++.visible {
+   opacity: 1;
+ }
+ 
+-.map-view.hidden {
++.hidden {
+   opacity: 0;
+ }
+ 
+-.container-botoes {
++.containerBotoes {
+   padding: 1rem;
+   text-align: center;
+   background: #f8f9fa;
+   border-top: 1px solid #ddd;
+ }
+ 
+-.botao-limpar {
++.botaoLimpar {
+   background: #0066cc;
+   color: white;
+   border: none;
+@@ .. @@
+   transition: all 0.3s ease;
+ }
+ 
+-.botao-limpar:hover {
++.botaoLimpar:hover {
+   background: #004d99;
+   transform: translateY(-2px);
+ }
+ 
+ @media (max-width: 768px) {
+-  .conteudo-modal {
++  .conteudoModal {
+     padding: 1.5rem;
+     margin: 1rem;
+   }
+   
+-  .titulo-modal {
++  .tituloModal {
+     font-size: 1.3rem;
+   }
+   
+-  .campo-endereco {
++  .campoEndereco {
+     font-size: 16px; /* Prevents zoom on iOS */
+   }
+ }
